@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Abril Fatface", cursive;
+  font-family: "Roboto", sans-serif;
+  font-family: "Roboto Slab", serif;
+  background: linear-gradient(
+    rgba(0, 165, 0, 1) 50%,
+    rgba(0, 153, 0, 1),
+    rgba(0, 102, 0, 1)
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Header */
+.header-wrapper {
+  display: flex;
+}
+
+.header-title {
+  margin: auto;
+  justify-content: center;
+}
+
+.header-font {
+  color: rgb(255, 235, 0);
+  text-shadow: -1px 1px 0 #000;
+  letter-spacing: 3px;
+  font-size: 48px;
+  font-family: "Abril Fatface", cursive;
+}
+
+@media screen and (max-width: 600px) {
+  .header-font {
+    font-size: 40px;
+  }
+}
