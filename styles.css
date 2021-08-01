@@ -15,16 +15,16 @@ body {
 }
 
 /* Header */
-.header-wrapper {
+.header_wrapper {
   display: flex;
 }
 
-.header-title {
+.header_title {
   margin: auto;
   justify-content: center;
 }
 
-.header-font {
+.header_font {
   color: rgb(255, 235, 0);
   text-shadow: -1px 1px 0 #000;
   letter-spacing: 3px;
@@ -33,7 +33,7 @@ body {
 }
 
 @media screen and (max-width: 600px) {
-  .header-font {
+  .header_font {
     font-size: 40px;
   }
 }
