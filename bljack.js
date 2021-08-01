@@ -1,6 +1,13 @@
 //References:
 //https://www.thatsoftwaredude.com/content/6417/how-to-code-blackjack-using-javascript
-//used as a general guide to building the deck and game logic
+//https://www.youtube.com/watch?v=oT49KkhOv-Y "2 - How to Blackjack in Javascript and HTML"
+//both used as a general guide to building the deck and game logic
+
+var dealer = [];
+var player = [];
+var dealerScore;
+var playerScore;
+var deck;
 
 function fullDeck() {
   const suits = ["Heart", "Diamonds", "Spades", "Clubs"];
@@ -19,7 +26,7 @@ function fullDeck() {
     "3",
     "2",
   ];
-  const deck = [];
+  deck = [];
   for (let s = 0; s < suits.length; s++) {
     for (let v = 0; v < values.length; v++) {
       let suit = suits[s];
@@ -40,24 +47,54 @@ function fullDeck() {
   }
   return deck;
 }
-// Cards is now a variable of the full deck array with suits, values, and score
-const cards = fullDeck();
+fullDeck();
 
 // Randomly choose a card when called, and splice to remove that card from the deck.
-function drawCard(cards) {
-  const random = Math.floor(Math.random() * cards.length);
-  const cardDrawn = cards[random];
-  cards.splice(random, 1);
+function randomCard() {
+  const randomIndex = Math.floor(Math.random() * deck.length);
+  const cardDrawn = deck[randomIndex];
+  deck.splice(randomIndex, 1);
   return cardDrawn;
 }
-
-// Use score prop to increase score after each card is played
-function scoreCard() {
-  const score = 0;
-
-  return score;
+//Build the player's hand
+function dealPlayerHand(deck) {
+  player.push(randomCard(deck));
+}
+//Build the dealer's hand
+function dealDealerHand(deck) {
+  dealer.push(randomCard(deck));
+}
+//add up the player's score
+function playerScoring() {
+  playerScore = 0;
+  for (let i = 0; i < player.length; i++) {
+    playerScore += player[i].score;
+  }
+}
+//add up the dealer's score
+function dealerScoring() {
+  dealerScore = 0;
+  for (let i = 0; i < dealer.length; i++) {
+    dealerScore += dealer[i].score;
+  }
 }
 
-// Hit, Stay, Win/Lose, Play Again
-// change card image based on card suit/value
-// intro/loading
+// Hit
+function hit() {
+  dealPlayerHand(deck);
+}
+
+// Stay
+function stay() {
+  if (dealerScore < 21) {
+    dealDealerHand(deck);
+  }
+}
+
+// Win/Lose, Play Again
+
+// Rendering in the DOM
+
+// Card Images
+
+// Score
