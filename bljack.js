@@ -5,8 +5,8 @@
 
 var dealer = [];
 var player = [];
-var dealerScore;
-var playerScore;
+var dealerScore = 0;
+var playerScore = 0;
 var deck;
 
 function fullDeck() {
@@ -64,12 +64,21 @@ function dealPlayerHand(deck) {
 function dealDealerHand(deck) {
   dealer.push(randomCard(deck));
 }
+
+function startGame() {
+  player.push(randomCard(deck));
+  dealer.push(randomCard(deck));
+  player.push(randomCard(deck));
+  dealer.push(randomCard(deck));
+}
+
 //add up the player's score
 function playerScoring() {
   playerScore = 0;
   for (let i = 0; i < player.length; i++) {
     playerScore += player[i].score;
   }
+  return playerScore;
 }
 //add up the dealer's score
 function dealerScoring() {
@@ -77,11 +86,15 @@ function dealerScoring() {
   for (let i = 0; i < dealer.length; i++) {
     dealerScore += dealer[i].score;
   }
+  return dealerScore;
 }
 
 // Hit
 function hit() {
   dealPlayerHand(deck);
+  if (dealerScore < 21) {
+    dealDealerHand(deck);
+  }
 }
 
 // Stay
