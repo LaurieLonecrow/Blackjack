@@ -22,7 +22,7 @@ body {
 .header_title {
   margin: auto;
   justify-content: center;
-  display: none;
+  display: block;
 }
 
 .header_font {
@@ -45,7 +45,9 @@ body {
 
 .card_wrapper1,
 .card_wrapper2,
-.card_wrapper3 {
+.card_wrapper3,
+.card_wrapper4,
+.card_wrapper5 {
   padding-top: 50px;
   display: flex;
   flex-direction: column;
@@ -102,9 +104,10 @@ body {
 }
 .button {
   margin: 4px 2px;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
   text-decoration: none;
+  width: 120px;
   font-size: 16px;
   border: 2px solid;
   border-radius: 50px;
@@ -121,11 +124,12 @@ body {
 .score_blocks {
   position: absolute;
   display: flex;
-  right: 0;
-  margin-right: 148px;
   flex-direction: column;
   justify-content: center;
-  gap: 50px;
+  right: 0;
+  top: 100px;
+  margin-right: 148px;
+  gap: 150px;
 }
 
 .score {
