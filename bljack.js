@@ -12,10 +12,10 @@ var deck;
 function fullDeck() {
   const suits = ["Heart", "Diamonds", "Spades", "Clubs"];
   const values = [
-    "Ace",
-    "King",
-    "Queen",
-    "Jack",
+    "A",
+    "K",
+    "Q",
+    "J",
     "10",
     "9",
     "8",
@@ -32,10 +32,10 @@ function fullDeck() {
       let suit = suits[s];
       let value = values[v];
       let score = parseInt(values[v]);
-      if (values[v] == "King" || values[v] == "Queen" || values[v] == "Jack") {
+      if (values[v] == "K" || values[v] == "Q" || values[v] == "J") {
         score = 10;
       }
-      if (values[v] == "Ace") {
+      if (values[v] == "A") {
         score = 11;
       }
       deck.push({
@@ -70,6 +70,10 @@ function startGame() {
   dealer.push(randomCard(deck));
   player.push(randomCard(deck));
   dealer.push(randomCard(deck));
+  appendDealerCard(dealer);
+  appendPlayerCard(player);
+  playerScoring();
+  dealerScoring();
 }
 
 //add up the player's score
@@ -92,8 +96,57 @@ function dealerScoring() {
 // Hit
 function hit() {
   dealPlayerHand(deck);
+  card6.insertAdjacentHTML(
+    "afterbegin",
+    `<div class="card_body">
+        <div class="card_detail">
+        <h1 class="card_top">${player[2].value}</h1>
+        <h1 class="card_suit">${player[2].suit}</h1>
+        <h1 class="card_bottom">${player[2].value}</h1>
+        </div>
+        </div>`
+  );
+
+  playerScoring();
+  dealerScoring();
+
   if (dealerScore < 21) {
     dealDealerHand(deck);
+    card5.insertAdjacentHTML(
+      "afterbegin",
+      `<div class="card_body">
+          <div class="card_detail">
+          <h1 class="card_top">${dealer[2].value}</h1>
+          <h1 class="card_suit">${dealer[2].suit}</h1>
+          <h1 class="card_bottom">${dealer[2].value}</h1>
+          </div>
+          </div>`
+    );
+  }
+
+  if (player.length === 3) {
+    card8.insertAdjacentHTML(
+      "afterbegin",
+      `<div class="card_body">
+        <div class="card_detail">
+        <h1 class="card_top">${player[3].value}</h1>
+        <h1 class="card_suit">${player[3].suit}</h1>
+        <h1 class="card_bottom">${player[3].value}</h1>
+        </div>
+        </div>`
+    );
+  }
+  if (player.length === 4) {
+    card8.insertAdjacentHTML(
+      "afterbegin",
+      `<div class="card_body">
+        <div class="card_detail">
+        <h1 class="card_top">${player[4].value}</h1>
+        <h1 class="card_suit">${player[4].suit}</h1>
+        <h1 class="card_bottom">${player[4].value}</h1>
+        </div>
+        </div>`
+    );
   }
 }
 
@@ -107,7 +160,67 @@ function stay() {
 // Win/Lose, Play Again
 
 // Rendering in the DOM
+const card1 = document.getElementById("dealer-card1");
+const card2 = document.getElementById("dealer-card2");
+const card3 = document.getElementById("player-card1");
+const card4 = document.getElementById("player-card2");
+const card5 = document.getElementById("dealer-card3");
+const card6 = document.getElementById("player-card3");
+const card7 = document.getElementById("dealer-card4");
+const card8 = document.getElementById("player-card4");
+const card9 = document.getElementById("dealer-card5");
+const card10 = document.getElementById("player-card5");
 
+function appendDealerCard() {
+  card1.insertAdjacentHTML(
+    "afterbegin",
+    `<div class="card_body">
+        <div class="card_detail">
+        <h1 class="card_top">${dealer[0].value}</h1>
+        <h1 class="card_suit">${dealer[0].suit}</h1>
+        <h1 class="card_bottom">${dealer[0].value}</h1>
+        </div>
+        </div>`
+  );
+
+  card2.insertAdjacentHTML(
+    "afterbegin",
+    `<div class="card_body">
+      <div class="card_detail">
+      <h1 class="card_top">${dealer[1].value}</h1>
+      <h1 class="card_suit">${dealer[1].suit}</h1>
+      <h1 class="card_bottom">${dealer[1].value}</h1>
+      </div>
+      </div>`
+  );
+}
+
+function appendPlayerCard() {
+  card3.insertAdjacentHTML(
+    "afterbegin",
+    `<div class="card_body">
+        <div class="card_detail">
+        <h1 class="card_top">${player[0].value}</h1>
+        <h1 class="card_suit">${player[0].suit}</h1>
+        <h1 class="card_bottom">${player[0].value}</h1>
+        </div>
+        </div>`
+  );
+
+  card4.insertAdjacentHTML(
+    "afterbegin",
+    `<div class="card_body">
+      <div class="card_detail">
+      <h1 class="card_top">${player[1].value}</h1>
+      <h1 class="card_suit">${player[1].suit}</h1>
+      <h1 class="card_bottom">${player[1].value}</h1>
+      </div>
+      </div>`
+  );
+}
 // Card Images
 
 // Score
+
+//jquery
+$(document).ready(function () {});
