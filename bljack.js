@@ -78,8 +78,7 @@ function dealerScoring() {
   return dealerScore;
 }
 
-//Build the hands
-
+//Start the Game
 function startGame() {
   player.push(randomCard(deck));
   dealer.push(randomCard(deck));
@@ -88,6 +87,55 @@ function startGame() {
   playerScoring();
   dealerScoring();
 }
+$(function () {
+  $("#start").click(function () {
+    $("#dealer-card0").append(`<div class="card_body">
+  <div class="card_detail">
+  <h1 class="card_top">${dealer[0].value}</h1>
+  <h1 class="card_suit">${dealer[0].suit}</h1>
+  <h1 class="card_bottom">${dealer[0].value}</h1>
+  </div>
+  </div>`);
+    $("#dealer-card1").append(`<div class="card_body">
+  <div class="card_detail">
+  <h1 class="card_top">${dealer[1].value}</h1>
+  <h1 class="card_suit">${dealer[1].suit}</h1>
+  <h1 class="card_bottom">${dealer[1].value}</h1>
+  </div>
+  </div>`);
+    $("#player-card0").append(`<div class="card_body">
+<div class="card_detail">
+<h1 class="card_top">${player[0].value}</h1>
+<h1 class="card_suit">${player[0].suit}</h1>
+<h1 class="card_bottom">${player[0].value}</h1>
+</div>
+</div>`);
+    $("#player-card1").append(`<div class="card_body">
+<div class="card_detail">
+<h1 class="card_top">${player[1].value}</h1>
+<h1 class="card_suit">${player[1].suit}</h1>
+<h1 class="card_bottom">${player[1].value}</h1>
+</div>
+</div>`);
+    $("#start").css("display", "none");
+    $("#restart").css("display", "block");
+  });
+});
+
+//Restart the Game
+function reStartGame() {
+  fullDeck();
+  dealer = [];
+  player = [];
+  playerScoring();
+  dealerScoring();
+}
+$(function () {
+  $("#restart").click(function () {
+    location.reload();
+  });
+});
+
 // Hit
 function hit() {
   if (playerScore < 21) {
@@ -136,40 +184,6 @@ function hit() {
   }
 }
 
-$(function () {
-  $("#start").click(function () {
-    $("#dealer-card0").append(`<div class="card_body">
-  <div class="card_detail">
-  <h1 class="card_top">${dealer[0].value}</h1>
-  <h1 class="card_suit">${dealer[0].suit}</h1>
-  <h1 class="card_bottom">${dealer[0].value}</h1>
-  </div>
-  </div>`);
-    $("#dealer-card1").append(`<div class="card_body">
-  <div class="card_detail">
-  <h1 class="card_top">${dealer[1].value}</h1>
-  <h1 class="card_suit">${dealer[1].suit}</h1>
-  <h1 class="card_bottom">${dealer[1].value}</h1>
-  </div>
-  </div>`);
-
-    $("#player-card0").append(`<div class="card_body">
-<div class="card_detail">
-<h1 class="card_top">${player[0].value}</h1>
-<h1 class="card_suit">${player[0].suit}</h1>
-<h1 class="card_bottom">${player[0].value}</h1>
-</div>
-</div>`);
-    $("#player-card1").append(`<div class="card_body">
-<div class="card_detail">
-<h1 class="card_top">${player[1].value}</h1>
-<h1 class="card_suit">${player[1].suit}</h1>
-<h1 class="card_bottom">${player[1].value}</h1>
-</div>
-</div>`);
-  });
-});
-
 // Stand
 $(function () {
   $("#stand").click(function () {
@@ -184,5 +198,4 @@ $(function () {
     }
   });
 });
-
 // Win/Lose, Play Again
