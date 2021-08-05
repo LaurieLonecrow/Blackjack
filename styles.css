@@ -43,11 +43,11 @@ body {
   margin-left: -100px;
 }
 
+.card_wrapper0,
 .card_wrapper1,
 .card_wrapper2,
 .card_wrapper3,
-.card_wrapper4,
-.card_wrapper5 {
+.card_wrapper4 {
   padding-top: 50px;
   display: flex;
   flex-direction: column;
@@ -55,8 +55,8 @@ body {
   transform: rotate(20deg);
 }
 
-.card_wrapper2,
-.card_wrapper3 {
+.card_wrapper1,
+.card_wrapper2 {
   position: absolute;
   opacity: 1;
   margin-left: 100px;
@@ -95,12 +95,12 @@ body {
 
 /* Buttons */
 .control_buttons {
-  position: absolute;
-  margin-left: 148px;
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 25px;
+  padding-top: 32px;
 }
 .button {
   margin: 4px 2px;
@@ -118,6 +118,10 @@ body {
 
 .button:hover {
   opacity: 1;
+}
+
+.restart {
+  display: none;
 }
 
 /* Score Card */
@@ -152,9 +156,12 @@ body {
   }
   .control_buttons,
   .score_blocks {
-    width: 50px;
     margin-right: 0;
     margin-top: 50px;
+  }
+
+  .control_buttons {
+    gap: 0;
   }
 
   .button,
