@@ -56,25 +56,6 @@ function randomCard() {
   deck.splice(randomIndex, 1);
   return cardDrawn;
 }
-//Build the player's hand
-function dealPlayerHand(deck) {
-  player.push(randomCard(deck));
-}
-//Build the dealer's hand
-function dealDealerHand(deck) {
-  dealer.push(randomCard(deck));
-}
-
-function startGame() {
-  player.push(randomCard(deck));
-  dealer.push(randomCard(deck));
-  player.push(randomCard(deck));
-  dealer.push(randomCard(deck));
-  appendDealerCard(dealer);
-  appendPlayerCard(player);
-  playerScoring();
-  dealerScoring();
-}
 
 //add up the player's score
 function playerScoring() {
@@ -82,6 +63,8 @@ function playerScoring() {
   for (let i = 0; i < player.length; i++) {
     playerScore += player[i].score;
   }
+  $("#player-score").html(`<h1>${playerScore}</h1>`);
+
   return playerScore;
 }
 //add up the dealer's score
@@ -90,137 +73,116 @@ function dealerScoring() {
   for (let i = 0; i < dealer.length; i++) {
     dealerScore += dealer[i].score;
   }
+  $("#dealer-score").html(`<h1>${dealerScore}</h1>`);
+
   return dealerScore;
 }
 
+//Build the hands
+
+function startGame() {
+  player.push(randomCard(deck));
+  dealer.push(randomCard(deck));
+  player.push(randomCard(deck));
+  dealer.push(randomCard(deck));
+  playerScoring();
+  dealerScoring();
+}
 // Hit
 function hit() {
-  dealPlayerHand(deck);
-  card6.insertAdjacentHTML(
-    "afterbegin",
-    `<div class="card_body">
-        <div class="card_detail">
-        <h1 class="card_top">${player[2].value}</h1>
-        <h1 class="card_suit">${player[2].suit}</h1>
-        <h1 class="card_bottom">${player[2].value}</h1>
-        </div>
-        </div>`
-  );
+  if (playerScore < 21) {
+    player.push(randomCard(deck));
+    $("#player-card2").append(`<div class="card_body">
+  <div class="card_detail">
+  <h1 class="card_top">${player[2].value}</h1>
+  <h1 class="card_suit">${player[2].suit}</h1>
+  <h1 class="card_bottom">${player[2].value}</h1>
+  </div>
+  </div>`);
 
+    if (dealerScore < 21) {
+      dealer.push(randomCard(deck));
+      $("#dealer-card2").append(`<div class="card_body">
+    <div class="card_detail">
+    <h1 class="card_top">${dealer[2].value}</h1>
+    <h1 class="card_suit">${dealer[2].suit}</h1>
+    <h1 class="card_bottom">${dealer[2].value}</h1>
+    </div>
+    </div>`);
+    }
+  }
   playerScoring();
   dealerScoring();
 
-  if (dealerScore < 21) {
-    dealDealerHand(deck);
-    card5.insertAdjacentHTML(
-      "afterbegin",
-      `<div class="card_body">
-          <div class="card_detail">
-          <h1 class="card_top">${dealer[2].value}</h1>
-          <h1 class="card_suit">${dealer[2].suit}</h1>
-          <h1 class="card_bottom">${dealer[2].value}</h1>
-          </div>
-          </div>`
-    );
-  }
-
   if (player.length === 3) {
-    card8.insertAdjacentHTML(
-      "afterbegin",
-      `<div class="card_body">
-        <div class="card_detail">
-        <h1 class="card_top">${player[3].value}</h1>
-        <h1 class="card_suit">${player[3].suit}</h1>
-        <h1 class="card_bottom">${player[3].value}</h1>
-        </div>
-        </div>`
-    );
+    player.push(randomCard(deck));
+    $("#player-card3").append(`<div class="card_body">
+  <div class="card_detail">
+  <h1 class="card_top">${player[3].value}</h1>
+  <h1 class="card_suit">${player[3].suit}</h1>
+  <h1 class="card_bottom">${player[3].value}</h1>
+  </div>
+  </div>`);
   }
   if (player.length === 4) {
-    card8.insertAdjacentHTML(
-      "afterbegin",
-      `<div class="card_body">
-        <div class="card_detail">
-        <h1 class="card_top">${player[4].value}</h1>
-        <h1 class="card_suit">${player[4].suit}</h1>
-        <h1 class="card_bottom">${player[4].value}</h1>
-        </div>
-        </div>`
-    );
+    player.push(randomCard(deck));
+    $("#player-card4").append(`<div class="card_body">
+  <div class="card_detail">
+  <h1 class="card_top">${player[4].value}</h1>
+  <h1 class="card_suit">${player[4].suit}</h1>
+  <h1 class="card_bottom">${player[4].value}</h1>
+  </div>
+  </div>`);
   }
 }
 
-// Stay
-function stay() {
-  if (dealerScore < 21) {
-    dealDealerHand(deck);
-  }
-}
+$(function () {
+  $("#start").click(function () {
+    $("#dealer-card0").append(`<div class="card_body">
+  <div class="card_detail">
+  <h1 class="card_top">${dealer[0].value}</h1>
+  <h1 class="card_suit">${dealer[0].suit}</h1>
+  <h1 class="card_bottom">${dealer[0].value}</h1>
+  </div>
+  </div>`);
+    $("#dealer-card1").append(`<div class="card_body">
+  <div class="card_detail">
+  <h1 class="card_top">${dealer[1].value}</h1>
+  <h1 class="card_suit">${dealer[1].suit}</h1>
+  <h1 class="card_bottom">${dealer[1].value}</h1>
+  </div>
+  </div>`);
 
-// Win/Lose, Play Again
+    $("#player-card0").append(`<div class="card_body">
+<div class="card_detail">
+<h1 class="card_top">${player[0].value}</h1>
+<h1 class="card_suit">${player[0].suit}</h1>
+<h1 class="card_bottom">${player[0].value}</h1>
+</div>
+</div>`);
+    $("#player-card1").append(`<div class="card_body">
+<div class="card_detail">
+<h1 class="card_top">${player[1].value}</h1>
+<h1 class="card_suit">${player[1].suit}</h1>
+<h1 class="card_bottom">${player[1].value}</h1>
+</div>
+</div>`);
+  });
+});
 
-// Rendering in the DOM
-const card1 = document.getElementById("dealer-card1");
-const card2 = document.getElementById("dealer-card2");
-const card3 = document.getElementById("player-card1");
-const card4 = document.getElementById("player-card2");
-const card5 = document.getElementById("dealer-card3");
-const card6 = document.getElementById("player-card3");
-const card7 = document.getElementById("dealer-card4");
-const card8 = document.getElementById("player-card4");
-const card9 = document.getElementById("dealer-card5");
-const card10 = document.getElementById("player-card5");
-
-function appendDealerCard() {
-  card1.insertAdjacentHTML(
-    "afterbegin",
-    `<div class="card_body">
-        <div class="card_detail">
-        <h1 class="card_top">${dealer[0].value}</h1>
-        <h1 class="card_suit">${dealer[0].suit}</h1>
-        <h1 class="card_bottom">${dealer[0].value}</h1>
-        </div>
-        </div>`
-  );
-
-  card2.insertAdjacentHTML(
-    "afterbegin",
-    `<div class="card_body">
+// Stand
+$(function () {
+  $("#stand").click(function () {
+    if (dealerScore < 20) {
+      $("#dealer-card2").append(`<div class="card_body">
       <div class="card_detail">
       <h1 class="card_top">${dealer[1].value}</h1>
       <h1 class="card_suit">${dealer[1].suit}</h1>
       <h1 class="card_bottom">${dealer[1].value}</h1>
       </div>
-      </div>`
-  );
-}
+      </div>`);
+    }
+  });
+});
 
-function appendPlayerCard() {
-  card3.insertAdjacentHTML(
-    "afterbegin",
-    `<div class="card_body">
-        <div class="card_detail">
-        <h1 class="card_top">${player[0].value}</h1>
-        <h1 class="card_suit">${player[0].suit}</h1>
-        <h1 class="card_bottom">${player[0].value}</h1>
-        </div>
-        </div>`
-  );
-
-  card4.insertAdjacentHTML(
-    "afterbegin",
-    `<div class="card_body">
-      <div class="card_detail">
-      <h1 class="card_top">${player[1].value}</h1>
-      <h1 class="card_suit">${player[1].suit}</h1>
-      <h1 class="card_bottom">${player[1].value}</h1>
-      </div>
-      </div>`
-  );
-}
-// Card Images
-
-// Score
-
-//jquery
-$(document).ready(function () {});
+// Win/Lose, Play Again
