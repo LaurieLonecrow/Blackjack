@@ -22,49 +22,63 @@
       </div>
     </header>
     <div class="page_wrapper">
+      <section id="scores">
+        <div class="score_blocks">
+          <div id="dealer-score" class="dealer score"></div>
+          <div id="player-score" class="player score"></div>
+        </div>
+      </section>
+
       <section>
         <div id="dealer-section" class="dealer_hand">
-          <div id="dealer-card0" class="card_wrapper1"></div>
-          <div id="dealer-card1" class="card_wrapper2"></div>
-          <div id="dealer-card2" class="card_wrapper3"></div>
-          <div id="dealer-card3" class="card_wrapper4"></div>
-          <div id="dealer-card4" class="card_wrapper5"></div>
+          <div id="dealer-card0" class="card_wrapper0"></div>
+          <div id="dealer-card1" class="card_wrapper1"></div>
+          <div id="dealer-card2" class="card_wrapper2"></div>
+          <div id="dealer-card3" class="card_wrapper3"></div>
+          <div id="dealer-card4" class="card_wrapper4"></div>
         </div>
       </section>
 
       <section>
         <div id="player-section" class="player_hand">
-          <div id="player-card0" class="card_wrapper1"></div>
-          <div id="player-card1" class="card_wrapper2"></div>
-          <div id="player-card2" class="card_wrapper3"></div>
-          <div id="player-card3" class="card_wrapper4"></div>
-          <div id="player-card4" class="card_wrapper5"></div>
+          <div id="player-card0" class="card_wrapper0"></div>
+          <div id="player-card1" class="card_wrapper1"></div>
+          <div id="player-card2" class="card_wrapper2"></div>
+          <div id="player-card3" class="card_wrapper3"></div>
+          <div id="player-card4" class="card_wrapper4"></div>
         </div>
       </section>
 
       <section id="buttons">
         <div class="control_buttons mobile_nav">
           <button
-            class="play button"
+            class="start button"
             type="button"
             id="start"
             onClick="startGame()"
           >
             <h1>Play Game</h1>
           </button>
-          <button class="hit button" type="button" name="hit" onclick="hit()">
+          <button
+            class="restart button"
+            type="button"
+            id="restart"
+            onClick="reStartGame()"
+          >
+            <h1>Play Again</h1>
+          </button>
+          <button
+            class="hit button"
+            type="button"
+            name="hit"
+            id="hit"
+            onclick="hit()"
+          >
             <h1>Hit</h1>
           </button>
           <button class="stand button" type="button" name="stand" id="stand">
             <h1>Stand</h1>
           </button>
-        </div>
-      </section>
-
-      <section id="scores">
-        <div class="score_blocks">
-          <div id="dealer-score" class="dealer score"></div>
-          <div id="player-score" class="player score"></div>
         </div>
       </section>
     </div>
