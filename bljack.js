@@ -10,7 +10,7 @@ var playerScore = 0;
 var deck;
 
 function fullDeck() {
-  const suits = ["Heart", "Diamonds", "Spades", "Clubs"];
+  const suits = ["♥", "♦", "♣", "♠"];
   const values = [
     "A",
     "K",
@@ -36,7 +36,7 @@ function fullDeck() {
         score = 10;
       }
       if (values[v] == "A") {
-        score = 11;
+        score = 1;
       }
       deck.push({
         value,
@@ -45,6 +45,7 @@ function fullDeck() {
       });
     }
   }
+
   return deck;
 }
 fullDeck();
@@ -57,24 +58,37 @@ function randomCard() {
   return cardDrawn;
 }
 
-//add up the player's score
+//add up the player's score with Ace value 11 for inital deal
 function playerScoring() {
   playerScore = 0;
   for (let i = 0; i < player.length; i++) {
-    playerScore += player[i].score;
+    if (
+      (player[0].value === "A" && player[1].score == 10) ||
+      (player[1].value === "A" && player[0].score == 10)
+    ) {
+      playerScore = 21;
+    } else {
+      playerScore += player[i].score;
+    }
   }
   $("#player-score").html(`<h1>${playerScore}</h1>`);
-
   return playerScore;
 }
-//add up the dealer's score
+
+//add up the dealer's score with Ace value 11 for inital deal
 function dealerScoring() {
   dealerScore = 0;
   for (let i = 0; i < dealer.length; i++) {
-    dealerScore += dealer[i].score;
+    if (
+      (dealer[0].value === "A" && dealer[1].score == 10) ||
+      (dealer[1].value === "A" && dealer[0].score == 10)
+    ) {
+      dealerScore = 21;
+    } else {
+      dealerScore += dealer[i].score;
+    }
   }
   $("#dealer-score").html(`<h1>${dealerScore}</h1>`);
-
   return dealerScore;
 }
 
@@ -87,36 +101,30 @@ function startGame() {
   playerScoring();
   dealerScoring();
 }
+
+function changeCard(card) {
+  if (card.suit === "♥" || card.suit === "♦") {
+    $(".card_detail").css("color", "red");
+  } else if (card.suit === "♣" || card.suit === "♠") {
+    $(".card_detail").css("color", "black");
+  }
+  return (cardAppend = `<div class="card_body">
+<div class="card_detail">
+<h1 class="card_top">${card.value}</h1>
+<h1 class="card_suit">${card.suit}</h1>
+<h1 class="card_bottom">${card.value}</h1>
+</div>
+</div>`);
+}
+
+// Start of game card display
 $(function () {
   $("#start").click(function () {
-    $("#dealer-card0").append(`<div class="card_body">
-  <div class="card_detail">
-  <h1 class="card_top">${dealer[0].value}</h1>
-  <h1 class="card_suit">${dealer[0].suit}</h1>
-  <h1 class="card_bottom">${dealer[0].value}</h1>
-  </div>
-  </div>`);
-    $("#dealer-card1").append(`<div class="card_body">
-  <div class="card_detail">
-  <h1 class="card_top">${dealer[1].value}</h1>
-  <h1 class="card_suit">${dealer[1].suit}</h1>
-  <h1 class="card_bottom">${dealer[1].value}</h1>
-  </div>
-  </div>`);
-    $("#player-card0").append(`<div class="card_body">
-<div class="card_detail">
-<h1 class="card_top">${player[0].value}</h1>
-<h1 class="card_suit">${player[0].suit}</h1>
-<h1 class="card_bottom">${player[0].value}</h1>
-</div>
-</div>`);
-    $("#player-card1").append(`<div class="card_body">
-<div class="card_detail">
-<h1 class="card_top">${player[1].value}</h1>
-<h1 class="card_suit">${player[1].suit}</h1>
-<h1 class="card_bottom">${player[1].value}</h1>
-</div>
-</div>`);
+    $(".header_title").hide();
+    $("#dealer-card0").append(changeCard(dealer[0]));
+    $("#dealer-card1").append(changeCard(dealer[1]));
+    $("#player-card0").append(changeCard(player[0]));
+    $("#player-card1").append(changeCard(player[1]));
     $("#start").css("display", "none");
     $("#restart").css("display", "block");
   });
@@ -138,64 +146,53 @@ $(function () {
 
 // Hit
 function hit() {
-  if (playerScore < 21) {
+  if (playerScore < 21 && player.length === 4) {
     player.push(randomCard(deck));
-    $("#player-card2").append(`<div class="card_body">
-  <div class="card_detail">
-  <h1 class="card_top">${player[2].value}</h1>
-  <h1 class="card_suit">${player[2].suit}</h1>
-  <h1 class="card_bottom">${player[2].value}</h1>
-  </div>
-  </div>`);
-
-    if (dealerScore < 21) {
-      dealer.push(randomCard(deck));
-      $("#dealer-card2").append(`<div class="card_body">
-    <div class="card_detail">
-    <h1 class="card_top">${dealer[2].value}</h1>
-    <h1 class="card_suit">${dealer[2].suit}</h1>
-    <h1 class="card_bottom">${dealer[2].value}</h1>
-    </div>
-    </div>`);
-    }
+    $("#player-card4").append(changeCard(player[4]));
+    playerScoring();
   }
-  playerScoring();
-  dealerScoring();
 
-  if (player.length === 3) {
+  if (playerScore < 21 && player.length === 3) {
     player.push(randomCard(deck));
-    $("#player-card3").append(`<div class="card_body">
-  <div class="card_detail">
-  <h1 class="card_top">${player[3].value}</h1>
-  <h1 class="card_suit">${player[3].suit}</h1>
-  <h1 class="card_bottom">${player[3].value}</h1>
-  </div>
-  </div>`);
+    $("#player-card3").append(changeCard(player[3]));
+    playerScoring();
   }
-  if (player.length === 4) {
+
+  if (playerScore < 21 && player.length === 2) {
     player.push(randomCard(deck));
-    $("#player-card4").append(`<div class="card_body">
-  <div class="card_detail">
-  <h1 class="card_top">${player[4].value}</h1>
-  <h1 class="card_suit">${player[4].suit}</h1>
-  <h1 class="card_bottom">${player[4].value}</h1>
-  </div>
-  </div>`);
+    $("#player-card2").append(changeCard(player[2]));
+    playerScoring();
+  }
+
+  if (dealerScore <= 19 && dealer.length === 3) {
+    dealer.push(randomCard(deck));
+    $("#dealer-card").append(changeCard(dealer[3]));
+    dealerScoring();
+  }
+  if (dealerScore <= 19 && dealer.length === 2) {
+    dealer.push(randomCard(deck));
+    $("#dealer-card2").append(changeCard(dealer[2]));
+    dealerScoring();
   }
 }
 
 // Stand
 $(function () {
   $("#stand").click(function () {
-    if (dealerScore < 20) {
-      $("#dealer-card2").append(`<div class="card_body">
-      <div class="card_detail">
-      <h1 class="card_top">${dealer[1].value}</h1>
-      <h1 class="card_suit">${dealer[1].suit}</h1>
-      <h1 class="card_bottom">${dealer[1].value}</h1>
-      </div>
-      </div>`);
+    if (dealerScore < playerScore && dealer.length === 2) {
+      dealer.push(randomCard(deck));
+      $("#dealer-card2").append(changeCard(dealer[2]));
+      dealerScoring();
     }
   });
 });
-// Win/Lose, Play Again
+
+// Win/Lose
+$(function () {
+  if (dealerScore === 21) {
+    $(".dealer_wins").toggleClass("display");
+  }
+  if (playerScore === 21) {
+    $(".player_wins").toggleClass("display");
+  }
+});
