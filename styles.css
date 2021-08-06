@@ -22,7 +22,6 @@ body {
 .header_title {
   margin: auto;
   justify-content: center;
-  display: none;
 }
 
 .header_font {
@@ -48,22 +47,12 @@ body {
 .card_wrapper2,
 .card_wrapper3,
 .card_wrapper4 {
+  margin-left: -50px;
   padding-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   transform: rotate(20deg);
-}
-
-.card_wrapper1,
-.card_wrapper2 {
-  position: absolute;
-  opacity: 1;
-  margin-left: 100px;
-}
-
-.card_wrapper3 {
-  margin-left: 200px;
 }
 
 .card_body {
@@ -148,19 +137,32 @@ body {
 
 @media screen and (max-width: 600px) {
   .header_font {
-    font-size: 40px;
+    font-size: 32px;
   }
-  .mobile_nav {
-    display: flex;
-    flex-direction: row;
+
+  .dealer_hand,
+  .player_hand {
+    padding-left: 24px;
   }
-  .control_buttons,
+
+  .card_body {
+    width: 80px;
+    height: 130px;
+  }
+
+  .card_detail h1 {
+    font-size: 18px;
+  }
+
   .score_blocks {
     margin-right: 0;
     margin-top: 50px;
+    padding-right: 24px;
   }
 
   .control_buttons {
+    margin-right: 0;
+    margin-top: 50px;
     gap: 0;
   }
 
@@ -168,6 +170,6 @@ body {
   .score {
     font-size: 10px;
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 50px;
   }
 }
