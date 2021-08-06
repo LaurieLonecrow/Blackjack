@@ -71,6 +71,9 @@ body {
   align-items: center;
   padding: 10px;
 }
+.red {
+  color: red;
+}
 
 .card_top {
   align-self: flex-start;
@@ -133,6 +136,40 @@ body {
   border: 2px solid;
   border-radius: 50px;
   background-color: #fff;
+}
+
+/* Outcomes */
+.outcomes {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.display {
+  margin: auto;
+  position: absolute;
+  left: auto;
+  right: auto;
+  z-index: 2;
+}
+
+.win {
+  font-size: 48px;
+  color: rgb(255, 235, 0);
+}
+
+.bust {
+  font-size: 48px;
+  color: rgba(0, 102, 0, 1);
+}
+
+.player_wins,
+.dealer_wins,
+.player_bust,
+.dealer_bust,
+.draw {
+  opacity: 0;
 }
 
 @media screen and (max-width: 600px) {
