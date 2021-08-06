@@ -100,31 +100,27 @@ function startGame() {
   dealer.push(randomCard(deck));
   playerScoring();
   dealerScoring();
+  winOrLose();
 }
-
+// Function to append card and adjust color per suit
 function changeCard(card) {
-  if (card.suit === "♥" || card.suit === "♦") {
-    $(".card_detail").css("color", "red");
-  } else if (card.suit === "♣" || card.suit === "♠") {
-    $(".card_detail").css("color", "black");
-  }
-  return (cardAppend = `<div class="card_body">
+  return `<div class="card_body">
 <div class="card_detail">
 <h1 class="card_top">${card.value}</h1>
 <h1 class="card_suit">${card.suit}</h1>
 <h1 class="card_bottom">${card.value}</h1>
 </div>
-</div>`);
+</div>`;
 }
 
 // Start of game card display
 $(function () {
   $("#start").click(function () {
     $(".header_title").hide();
-    $("#dealer-card0").append(changeCard(dealer[0]));
-    $("#dealer-card1").append(changeCard(dealer[1]));
     $("#player-card0").append(changeCard(player[0]));
+    $("#dealer-card0").append(changeCard(dealer[0]));
     $("#player-card1").append(changeCard(player[1]));
+    $("#dealer-card1").append(changeCard(dealer[1]));
     $("#start").css("display", "none");
     $("#restart").css("display", "block");
   });
@@ -150,29 +146,34 @@ function hit() {
     player.push(randomCard(deck));
     $("#player-card4").append(changeCard(player[4]));
     playerScoring();
+    winOrLose();
   }
 
   if (playerScore < 21 && player.length === 3) {
     player.push(randomCard(deck));
     $("#player-card3").append(changeCard(player[3]));
     playerScoring();
+    winOrLose();
   }
 
   if (playerScore < 21 && player.length === 2) {
     player.push(randomCard(deck));
     $("#player-card2").append(changeCard(player[2]));
     playerScoring();
+    winOrLose();
   }
 
-  if (dealerScore <= 19 && dealer.length === 3) {
+  if (dealerScore <= 18 && dealer.length === 3) {
     dealer.push(randomCard(deck));
     $("#dealer-card").append(changeCard(dealer[3]));
     dealerScoring();
+    winOrLose();
   }
-  if (dealerScore <= 19 && dealer.length === 2) {
+  if (dealerScore <= 18 && dealer.length === 2) {
     dealer.push(randomCard(deck));
     $("#dealer-card2").append(changeCard(dealer[2]));
     dealerScoring();
+    winOrLose();
   }
 }
 
@@ -183,16 +184,34 @@ $(function () {
       dealer.push(randomCard(deck));
       $("#dealer-card2").append(changeCard(dealer[2]));
       dealerScoring();
+      winOrLose();
     }
   });
 });
 
 // Win/Lose
-$(function () {
-  if (dealerScore === 21) {
-    $(".dealer_wins").toggleClass("display");
+function winOrLose() {
+  if (
+    dealerScore === 21 ||
+    (dealerScore > playerScore && dealerScore > 19 && dealerScore < 21) ||
+    (playerScore > 21 && dealerScore < 21)
+  ) {
+    $(".dealer_wins").animate({ opacity: 1, right: "180px" });
   }
-  if (playerScore === 21) {
-    $(".player_wins").toggleClass("display");
+  if (
+    playerScore === 21 ||
+    (playerScore > dealerScore && playerScore > 19 && playerScore < 21) ||
+    (dealerScore > 21 && playerScore < 21)
+  ) {
+    $(".player_wins").animate({ opacity: 1, right: "180px" });
   }
-});
+  if (playerScore > 21) {
+    $(".player_bust").animate({ opacity: 1, left: "180px" });
+  }
+  if (dealerScore > 21) {
+    $(".dealer_bust").animate({ opacity: 1, left: "180px" });
+  }
+  if (dealerScore === playerScore && player.length > 3) {
+    $(".draw").animate({ opacity: 1, left: "180px" });
+  }
+}
