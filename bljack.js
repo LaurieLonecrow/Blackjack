@@ -200,7 +200,10 @@ function winOrLose() {
   }
   if (
     playerScore === 21 ||
-    (playerScore > dealerScore && playerScore > 19 && playerScore < 21) ||
+    (playerScore > dealerScore &&
+      playerScore > 19 &&
+      playerScore < 21 &&
+      player.length > 2) ||
     (dealerScore > 21 && playerScore < 21)
   ) {
     $(".player_wins").animate({ opacity: 1, right: "180px" });
@@ -211,7 +214,7 @@ function winOrLose() {
   if (dealerScore > 21) {
     $(".dealer_bust").animate({ opacity: 1, left: "180px" });
   }
-  if (dealerScore === playerScore && player.length > 3) {
+  if (dealerScore === playerScore && player.length >= 3) {
     $(".draw").animate({ opacity: 1, left: "180px" });
   }
 }
