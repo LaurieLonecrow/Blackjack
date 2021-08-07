@@ -230,9 +230,10 @@ $(function () {
 // Win/Lose
 function winOrLose() {
   if (
-    playerScore > 21 &&
-    playerScore < dealerScore &&
-    playerScore != dealerScore
+    (playerScore > 21 &&
+      playerScore < dealerScore &&
+      playerScore != dealerScore) ||
+    (playerScore < dealerScore && dealerScore >= 19 && player.length === 5)
   ) {
     $(".player_bust").animate({ opacity: 1, left: "180px" });
     $(".dealer_wins").animate({ opacity: 1, right: "180px" });
