@@ -230,18 +230,16 @@ $(function () {
 // Win/Lose
 function winOrLose() {
   if (
-    (playerScore > 21 &&
-      playerScore < dealerScore &&
-      playerScore != dealerScore) ||
-    (playerScore > dealerScore && dealer.length >= 3 && playerScore < 21)
+    playerScore > 21 &&
+    playerScore < dealerScore &&
+    playerScore != dealerScore
   ) {
     $(".player_bust").animate({ opacity: 1, left: "180px" });
     $(".dealer_wins").animate({ opacity: 1, right: "180px" });
   } else if (
-    (dealerScore > 21 &&
-      playerScore > dealerScore &&
-      playerScore != dealerScore) ||
-    (playerScore < dealerScore && dealer.length >= 3 && dealerScore < 21)
+    dealerScore > 21 &&
+    playerScore > dealerScore &&
+    playerScore != dealerScore
   ) {
     $(".player_wins").animate({ opacity: 1, right: "180px" });
   } else if (
