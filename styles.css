@@ -53,6 +53,7 @@ body {
   flex-direction: column;
   align-items: center;
   transform: rotate(20deg);
+  /* perspective: 500px; */
 }
 
 .card_body {
@@ -63,6 +64,8 @@ body {
   border: 2px solid;
   border-radius: 15px;
   background-color: #fff;
+  /* transition: transform 400ms;
+  will-change: transform; */
 }
 
 .card_detail {
@@ -71,6 +74,12 @@ body {
   align-items: center;
   padding: 10px;
 }
+
+/* .card_body:hover .card_detail,
+.card_body:focus .card_detail {
+  transform: rotateY(180deg);
+} */
+
 .red {
   color: red;
 }
@@ -168,7 +177,7 @@ body {
 .dealer_wins,
 .player_bust,
 .dealer_bust,
-.draw {
+.push {
   opacity: 0;
 }
 

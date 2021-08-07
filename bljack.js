@@ -32,16 +32,25 @@ function fullDeck() {
       let suit = suits[s];
       let value = values[v];
       let score = parseInt(values[v]);
+
       if (values[v] == "K" || values[v] == "Q" || values[v] == "J") {
         score = 10;
       }
       if (values[v] == "A") {
         score = 1;
       }
+      let color;
+      if (suits[s] == "♥" || suits[s] == "♦") {
+        color = "red";
+      }
+      if (suits[s] == "♣" || suits[s] == "♠") {
+        color = "black";
+      }
       deck.push({
         value,
         suit,
         score,
+        color,
       });
     }
   }
@@ -105,7 +114,7 @@ function startGame() {
 // Function to append card and adjust color per suit
 function changeCard(card) {
   return `<div class="card_body">
-<div class="card_detail">
+<div class="card_detail" style="color:${card.color};">
 <h1 class="card_top">${card.value}</h1>
 <h1 class="card_suit">${card.suit}</h1>
 <h1 class="card_bottom">${card.value}</h1>
@@ -134,11 +143,12 @@ function reStartGame() {
   playerScoring();
   dealerScoring();
 }
-$(function () {
+
+function reStart() {
   $("#restart").click(function () {
     location.reload();
   });
-});
+}
 
 // Hit
 function hit() {
@@ -163,13 +173,13 @@ function hit() {
     winOrLose();
   }
 
-  if (dealerScore <= 18 && dealer.length === 3) {
+  if (dealerScore <= 18 && dealer.length === 3 && dealerScore < playerScore) {
     dealer.push(randomCard(deck));
     $("#dealer-card").append(changeCard(dealer[3]));
     dealerScoring();
     winOrLose();
   }
-  if (dealerScore <= 18 && dealer.length === 2) {
+  if (dealerScore <= 18 && dealer.length === 2 && dealerScore <= playerScore) {
     dealer.push(randomCard(deck));
     $("#dealer-card2").append(changeCard(dealer[2]));
     dealerScoring();
@@ -180,11 +190,39 @@ function hit() {
 // Stand
 $(function () {
   $("#stand").click(function () {
-    if (dealerScore < playerScore && dealer.length === 2) {
-      dealer.push(randomCard(deck));
-      $("#dealer-card2").append(changeCard(dealer[2]));
-      dealerScoring();
-      winOrLose();
+    winOrLose();
+    if (dealer.length === 4) {
+      if (
+        dealerScore < playerScore ||
+        (dealerScore === playerScore && dealerScore < 21)
+      ) {
+        dealer.push(randomCard(deck));
+        $("#dealer-card4").append(changeCard(dealer[4]));
+        dealerScoring();
+        winOrLose();
+      }
+    }
+    if (dealer.length === 3) {
+      if (
+        dealerScore < playerScore ||
+        (dealerScore === playerScore && dealerScore < 21)
+      ) {
+        dealer.push(randomCard(deck));
+        $("#dealer-card3").append(changeCard(dealer[3]));
+        dealerScoring();
+        winOrLose();
+      }
+    }
+    if (dealer.length === 2) {
+      if (
+        dealerScore < playerScore ||
+        (dealerScore === playerScore && dealerScore < 21)
+      ) {
+        dealer.push(randomCard(deck));
+        $("#dealer-card2").append(changeCard(dealer[2]));
+        dealerScoring();
+        winOrLose();
+      }
     }
   });
 });
@@ -192,29 +230,50 @@ $(function () {
 // Win/Lose
 function winOrLose() {
   if (
+    (playerScore > 21 &&
+      playerScore < dealerScore &&
+      playerScore != dealerScore) ||
+    (playerScore > dealerScore && dealer.length >= 3 && playerScore < 21)
+  ) {
+    $(".player_bust").animate({ opacity: 1, left: "180px" });
+    $(".dealer_wins").animate({ opacity: 1, right: "180px" });
+  } else if (
+    (dealerScore > 21 &&
+      playerScore > dealerScore &&
+      playerScore != dealerScore) ||
+    (playerScore < dealerScore && dealer.length >= 3 && dealerScore < 21)
+  ) {
+    $(".player_wins").animate({ opacity: 1, right: "180px" });
+  } else if (
     dealerScore === 21 ||
-    (dealerScore > playerScore && dealerScore > 19 && dealerScore < 21) ||
+    (dealerScore > playerScore &&
+      dealerScore >= 19 &&
+      dealerScore <= 21 &&
+      dealer.length > 2 &&
+      player.length > 2) ||
     (playerScore > 21 && dealerScore < 21)
   ) {
     $(".dealer_wins").animate({ opacity: 1, right: "180px" });
-  }
-  if (
-    playerScore === 21 ||
+  } else if (
+    (playerScore === 21 && dealer.length >= 2) ||
+    (playerScore > dealerScore &&
+      playerScore > 19 &&
+      playerScore < 21 &&
+      dealer.length > 2) ||
     (playerScore > dealerScore &&
       playerScore > 19 &&
       playerScore < 21 &&
       player.length > 2) ||
-    (dealerScore > 21 && playerScore < 21)
+    (dealerScore > 21 && playerScore < 21) ||
+    (playerScore > 21 && dealerScore > 21 && playerScore > dealerScore)
   ) {
     $(".player_wins").animate({ opacity: 1, right: "180px" });
+  } else if (
+    dealerScore === playerScore &&
+    player.length > 2 &&
+    playerScore > 17
+  ) {
+    $(".push").animate({ opacity: 1, left: "180px" });
   }
-  if (playerScore > 21) {
-    $(".player_bust").animate({ opacity: 1, left: "180px" });
-  }
-  if (dealerScore > 21) {
-    $(".dealer_bust").animate({ opacity: 1, left: "180px" });
-  }
-  if (dealerScore === playerScore && player.length >= 3) {
-    $(".draw").animate({ opacity: 1, left: "180px" });
-  }
+  reStart();
 }
