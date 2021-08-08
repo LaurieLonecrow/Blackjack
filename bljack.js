@@ -125,7 +125,6 @@ function changeCard(card) {
 // Start of game card display
 $(function () {
   $("#start").click(function () {
-    $(".header_title").hide();
     $("#player-card0").append(changeCard(player[0]));
     $("#dealer-card0").append(changeCard(dealer[0]));
     $("#player-card1").append(changeCard(player[1]));
@@ -190,7 +189,6 @@ function hit() {
 // Stand
 $(function () {
   $("#stand").click(function () {
-    winOrLose();
     if (dealer.length === 4) {
       if (
         dealerScore < playerScore ||
@@ -230,17 +228,24 @@ $(function () {
 // Win/Lose
 function winOrLose() {
   if (
+    (playerScore < 21 &&
+      playerScore < dealerScore &&
+      playerScore != dealerScore &&
+      player.length == 5) ||
     (playerScore > 21 &&
       playerScore < dealerScore &&
       playerScore != dealerScore) ||
-    (playerScore < dealerScore && dealerScore >= 19 && player.length === 5)
+    (playerScore < dealerScore && dealerScore >= 19 && player.length == 5)
   ) {
-    $(".player_bust").animate({ opacity: 1, left: "180px" });
     $(".dealer_wins").animate({ opacity: 1, right: "180px" });
   } else if (
-    dealerScore > 21 &&
-    playerScore > dealerScore &&
-    playerScore != dealerScore
+    (playerScore < 21 &&
+      playerScore > dealerScore &&
+      playerScore != dealerScore &&
+      player.length >= 4) ||
+    (dealerScore > 21 &&
+      playerScore > dealerScore &&
+      playerScore != dealerScore)
   ) {
     $(".player_wins").animate({ opacity: 1, right: "180px" });
   } else if (
@@ -270,7 +275,7 @@ function winOrLose() {
   } else if (
     dealerScore === playerScore &&
     player.length > 2 &&
-    playerScore > 17
+    playerScore < 21
   ) {
     $(".push").animate({ opacity: 1, left: "180px" });
   }
