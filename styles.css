@@ -22,6 +22,7 @@ body {
 .header_title {
   margin: auto;
   justify-content: center;
+  /* display: none; */
 }
 
 .header_font {
@@ -39,13 +40,13 @@ body {
 .player_hand {
   display: flex;
   justify-content: center;
-  margin-left: -100px;
-  height: 200px;
+  /* margin-left: -100px; */
+  height: 175px;
 }
 
-/* @keyframes dealingCards {
+@keyframes dealingCards {
   from {
-    transform: rotate(20deg) translateY(-200%);
+    transform: rotate(0deg) translateY(-200%);
     opacity: 0;
   }
   to {
@@ -53,29 +54,34 @@ body {
     opacity: 1;
   }
 }
+
+.card_animate {
+  animation: dealingCards 0.7s forwards;
+}
+
 .dealt_card {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100px;
   height: 160px;
+  margin-left: -50px;
   border: 2px solid;
   border-radius: 15px;
   background-color: #fff;
-  animation: dealingCards 1s;
-  transform: rotate(20deg);
-} */
+  opacity: 0;
+}
 
 .card_wrapper0,
 .card_wrapper1,
 .card_wrapper2,
 .card_wrapper3,
 .card_wrapper4 {
-  margin-left: -50px;
+  /* margin-left: -50px; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform: rotate(20deg);
-  /* perspective: 500px; */
+  /* transform: rotate(20deg); */
 }
 
 .card_body {
@@ -86,8 +92,6 @@ body {
   border: 2px solid;
   border-radius: 15px;
   background-color: #fff;
-  /* transition: transform 400ms;
-  will-change: transform; */
 }
 
 .card_detail {
@@ -95,42 +99,52 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  font-family: "Abril Fatface", cursive;
 }
-
-/* .card_body:hover .card_detail,
-.card_body:focus .card_detail {
-  transform: rotateY(180deg);
-} */
-
-.red {
-  color: red;
-}
-
+.card_suit_top,
 .card_top {
   align-self: flex-start;
   margin: 0;
 }
+.card_suit {
+  margin: 5px;
+}
 
+.card_suit_top,
+.card_suit_bottom {
+  font-size: 10px;
+}
+
+.card_suit_bottom,
 .card_bottom {
   align-self: flex-end;
   margin: 0;
+  transform: rotateX(180deg) rotateY(180deg);
 }
 
 /* Buttons */
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
 .control_buttons {
-  position: relative;
+  /* position: relative; */
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 25px;
 }
+
 .button {
   margin: 4px 2px;
-  padding: 5px;
+  padding: 3px;
   text-align: center;
   text-decoration: none;
+  font-family: "Abril Fatface", cursive;
   width: 120px;
-  font-size: 16px;
+  font-size: 14px;
   border: 2px solid;
   border-radius: 50px;
   background-color: red;
@@ -161,8 +175,9 @@ body {
 .score {
   text-align: center;
   text-decoration: none;
+  font-family: "Abril Fatface", cursive;
   padding: 15px;
-  font-size: 12px;
+  font-size: 14px;
   border: 2px solid;
   border-radius: 50px;
   background-color: #fff;
@@ -174,6 +189,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: "Abril Fatface", cursive;
 }
 
 .display {
@@ -187,11 +203,13 @@ body {
 .win {
   font-size: 48px;
   color: rgb(255, 235, 0);
+  text-shadow: -1px 1px 0 #000;
 }
 
 .bust {
   font-size: 48px;
   color: rgba(0, 102, 0, 1);
+  text-shadow: -1px 1px 0 #000;
 }
 
 .player_wins,
@@ -213,7 +231,8 @@ body {
     padding-top: 10px;
   }
 
-  .card_body {
+  .card_body,
+  .dealt_card {
     width: 80px;
     height: 130px;
   }

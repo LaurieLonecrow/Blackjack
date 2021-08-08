@@ -32,12 +32,12 @@
 
       <section>
         <div id="dealer-section" class="dealer_hand">
-          <div class="dealt_card">
-            <div id="dealer-card0" class="card_wrapper0"></div>
-          </div>
-          <div class="dealt_card" style="animation-delay: 0.6s;">
-            <div id="dealer-card1" class="card_wrapper1"></div>
-          </div>
+          <!-- <div class="dealt_card"> -->
+          <div id="dealer-card0" class="card_wrapper0"></div>
+          <!-- </div> -->
+          <!-- <div class="dealt_card" style="animation-delay: 0.3s;"> -->
+          <div id="dealer-card1" class="card_wrapper1"></div>
+          <!-- </div> -->
           <div id="dealer-card2" class="card_wrapper2"></div>
           <div id="dealer-card3" class="card_wrapper3"></div>
           <div id="dealer-card4" class="card_wrapper4"></div>
@@ -56,15 +56,22 @@
 
       <section>
         <div id="player-section" class="player_hand">
+          <!-- <div class="dealt_card" style="animation-delay: 0.8s;"> -->
+          <!-- <div class="card_wrapper0 back"></div> -->
           <div id="player-card0" class="card_wrapper0"></div>
+          <!-- </div> -->
+          <!-- <div class="dealt_card" style="animation-delay: 1s;"> -->
           <div id="player-card1" class="card_wrapper1"></div>
-          <div id="player-card2" class="card_wrapper2"></div>
+          <!-- </div> -->
+          <div>
+            <div id="player-card2" class="card_wrapper2"></div>
+          </div>
           <div id="player-card3" class="card_wrapper3"></div>
           <div id="player-card4" class="card_wrapper4"></div>
         </div>
       </section>
 
-      <section id="buttons">
+      <footer id="buttons">
         <div class="control_buttons">
           <button
             class="start button"
@@ -95,7 +102,7 @@
             <h1>Stand</h1>
           </button>
         </div>
-      </section>
+      </footer>
     </div>
     <script type="text/javascript" src="bljack.js"></script>
   </body>
