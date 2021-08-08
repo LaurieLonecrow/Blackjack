@@ -80,7 +80,7 @@ function playerScoring() {
       playerScore += player[i].score;
     }
   }
-  $("#player-score").html(`<h1>${playerScore}</h1>`);
+  $("#player-score").html(`<h1>${playerScore}</h1>`).css("font-size", "12px");
   return playerScore;
 }
 
@@ -98,7 +98,7 @@ function dealerScoring() {
       dealerScore += dealer[i].score;
     }
   }
-  $("#dealer-score").html(`<h1>${dealerScore}</h1>`);
+  $("#dealer-score").html(`<h1>${dealerScore}</h1>`).css("font-size", "12px");
   return dealerScore;
 }
 
@@ -284,7 +284,10 @@ function winOrLose() {
     (dealerScore > playerScore &&
       dealerScore >= 19 &&
       dealerScore <= 21 &&
-      dealer.length > 2 &&
+      dealer.length > 2) ||
+    (dealerScore > playerScore &&
+      dealerScore >= 19 &&
+      dealerScore <= 21 &&
       player.length > 2) ||
     (playerScore > 21 && dealerScore < 21)
   ) {

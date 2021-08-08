@@ -59,6 +59,7 @@ body {
   display: flex;
   justify-content: center;
   height: 175px;
+  margin-bottom: 20px;
 }
 
 .card_wrapper0,
@@ -176,7 +177,7 @@ body {
   text-decoration: none;
   font-family: "Abril Fatface", cursive;
   padding: 15px;
-  font-size: 14px;
+  font-size: 18px;
   border: 2px solid;
   border-radius: 50px;
   background-color: #fff;
@@ -228,6 +229,7 @@ body {
   .player_hand {
     padding-left: 24px;
     padding-top: 10px;
+    margin-bottom: 0;
   }
 
   .card_body,
@@ -242,7 +244,6 @@ body {
 
   .score_blocks {
     margin-right: 0;
-    margin-top: 50px;
     padding-right: 24px;
   }
 
@@ -252,10 +253,15 @@ body {
     gap: 0;
   }
 
-  .button,
-  .score {
+  .button {
     font-size: 10px;
     padding: 5px;
+    border-radius: 50px;
+  }
+
+  .score {
+    font-size: 18px;
+    padding: 0 5px;
     border-radius: 50px;
   }
 }
