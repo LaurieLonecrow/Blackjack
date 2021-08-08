@@ -3,13 +3,9 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: "Abril Fatface", cursive;
-  font-family: "Roboto", sans-serif;
-  font-family: "Roboto Slab", serif;
-  background: linear-gradient(
-    rgba(0, 165, 0, 1) 50%,
-    rgba(0, 153, 0, 1),
-    rgba(0, 102, 0, 1)
-  );
+  /* font-family: "Roboto", sans-serif;
+  font-family: "Roboto Slab", serif; */
+  background: linear-gradient(rgb(111, 201, 191) 0%, rgb(40, 77, 89) 100%);
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -22,12 +18,11 @@ body {
 .header_title {
   margin: auto;
   justify-content: center;
-  /* display: none; */
 }
 
 .header_font {
-  color: rgb(255, 235, 0);
-  text-shadow: -1px 1px 0 #000;
+  color: rgb(228, 136, 145);
+  text-shadow: -2px 2px 2px #000;
   letter-spacing: 3px;
   font-size: 48px;
   font-family: "Abril Fatface", cursive;
@@ -120,46 +115,6 @@ body {
   transform: rotateX(180deg) rotateY(180deg);
 }
 
-/* Buttons */
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-.control_buttons {
-  /* position: relative; */
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 25px;
-}
-
-.button {
-  margin: 4px 2px;
-  padding: 3px;
-  text-align: center;
-  text-decoration: none;
-  font-family: "Abril Fatface", cursive;
-  width: 120px;
-  font-size: 14px;
-  border: 2px solid;
-  border-radius: 50px;
-  background-color: red;
-  opacity: 0.9;
-  transition: 0.2s;
-}
-
-.button:hover {
-  opacity: 1;
-}
-
-.hit,
-.stand,
-.restart {
-  display: none;
-}
-
 /* Score Card */
 .score_blocks {
   position: absolute;
@@ -167,9 +122,9 @@ body {
   flex-direction: column;
   justify-content: center;
   right: 0;
-  top: 100px;
   margin-right: 148px;
-  gap: 150px;
+  top: 120px;
+  gap: 90px;
 }
 
 .score {
@@ -202,13 +157,13 @@ body {
 
 .win {
   font-size: 48px;
-  color: rgb(255, 235, 0);
+  color: rgb(249, 233, 102);
   text-shadow: -1px 1px 0 #000;
 }
 
 .bust {
   font-size: 48px;
-  color: rgba(0, 102, 0, 1);
+  color: rgb(40, 77, 89);
   text-shadow: -1px 1px 0 #000;
 }
 
@@ -218,6 +173,46 @@ body {
 .dealer_bust,
 .push {
   opacity: 0;
+}
+
+/* Buttons */
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.control_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 25px;
+}
+
+.button {
+  margin: 4px 2px;
+  padding: 3px;
+  text-align: center;
+  text-decoration: none;
+  font-family: "Abril Fatface", cursive;
+  width: 120px;
+  font-size: 14px;
+  border: 2px solid;
+  border-radius: 50px;
+  background-color: rgb(214, 74, 87);
+  opacity: 0.9;
+  transition: 0.2s;
+  color: #fff;
+}
+
+.button:hover {
+  opacity: 1;
+}
+
+.hit,
+.stand,
+.restart {
+  display: none;
 }
 
 @media screen and (max-width: 600px) {
@@ -235,7 +230,7 @@ body {
   .card_body,
   .dealt_card {
     width: 80px;
-    height: 130px;
+    height: 133px;
   }
 
   .card_detail h1 {
@@ -243,7 +238,7 @@ body {
   }
 
   .score_blocks {
-    margin-right: 0;
+    margin-right: -48px;
     padding-right: 24px;
   }
 
@@ -261,7 +256,7 @@ body {
 
   .score {
     font-size: 18px;
-    padding: 0 5px;
+    padding: 15px 35px;
     border-radius: 50px;
   }
 }

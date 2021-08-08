@@ -41,7 +41,7 @@ function fullDeck() {
       }
       let color;
       if (suits[s] == "♥" || suits[s] == "♦") {
-        color = "red";
+        color = "rgb(214,74,87)";
       }
       if (suits[s] == "♣" || suits[s] == "♠") {
         color = "black";
@@ -102,6 +102,10 @@ function dealerScoring() {
   return dealerScore;
 }
 
+function dealerInitialScore() {
+  dealerScore = dealer[0].score;
+  $("#dealer-score").html(`<h1>${dealerScore}</h1>`).css("font-size", "12px");
+}
 //Start the Game
 function startGame() {
   player.push(randomCard(deck));
@@ -146,7 +150,7 @@ $(function () {
       .css("animation-delay", "1s");
     $("#start, #restart").css("display", "none");
     $("#hit, #stand").css("display", "block");
-    $("#hit").css("background-color", "rgb(255, 235, 0)");
+    $("#hit").css("background-color", "rgb(40, 77, 89)");
   });
 });
 
