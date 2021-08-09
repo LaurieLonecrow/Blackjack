@@ -271,6 +271,7 @@ function stand() {
     }
   } else if (dealer.length === 4) {
     if (
+      (dealerScore > playerScore && dealerScore > 21) ||
       (dealerScore > playerScore && dealerScore <= 21) ||
       dealerScore === playerScore
     ) {

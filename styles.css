@@ -3,8 +3,6 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: "Abril Fatface", cursive;
-  font-family: "Roboto", sans-serif;
-  font-family: "Roboto Slab", serif;
   background: radial-gradient(
     circle,
     rgba(245, 120, 110, 0.8) 0%,
