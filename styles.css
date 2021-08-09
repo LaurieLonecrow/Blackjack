@@ -5,10 +5,10 @@ body {
   font-family: "Abril Fatface", cursive;
   /* font-family: "Roboto", sans-serif;
   font-family: "Roboto Slab", serif; */
-  background: linear-gradient(
-    0deg,
+  background: radial-gradient(
+    circle,
     rgba(245, 120, 110, 0.8) 0%,
-    rgba(89, 23, 249, 1) 50%,
+    rgba(89, 23, 249, 1) 60%,
     rgba(133, 40, 250, 1) 100%
   );
   background-repeat: no-repeat;
