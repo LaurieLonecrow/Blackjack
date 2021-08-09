@@ -111,6 +111,7 @@ function dealerInitialScoring() {
     .html(`<h1>${dealerInitialScore}</h1>`)
     .css("font-size", "12px");
 }
+
 //Start the Game
 function startGame() {
   player.push(randomCard(deck));
@@ -119,9 +120,9 @@ function startGame() {
   dealer.push(randomCard(deck));
   winOrLose();
   setTimeout(dealerInitialScoring, 2000);
-  // setTimeout(dealerScoring, 2000);
   setTimeout(playerScoring, 2000);
 }
+
 // Function to append cards and adjust colors per suit
 function changeCard(card) {
   return `<div class="card_body">
@@ -179,7 +180,6 @@ $(function () {
 });
 
 //Restart the Game
-
 function reStartGame() {
   fullDeck();
   dealer = [];
@@ -250,6 +250,7 @@ function stand() {
   } else if (dealer.length === 3) {
     if (
       (dealerScore > playerScore && dealerScore <= 21) ||
+      dealerScore > 21 ||
       dealerScore === playerScore
     ) {
       setTimeout(winOrLose, 1500);

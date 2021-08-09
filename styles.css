@@ -1,22 +1,27 @@
+/* References */
+/* FlipCard animation inspired by https://www.youtube.com/watch?v=QhKdOrOh90w */
+/* CSS Animation Tutorial #13 - Flipping Cards Animation by The Net Ninja */
+
 body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Abril Fatface", cursive;
   background: radial-gradient(
     circle,
     rgba(245, 120, 110, 1) 0.5%,
     rgba(89, 23, 249, 1) 60%,
     rgba(133, 40, 250, 1) 100%
   );
-  background-repeat: no-repeat;
   background-attachment: fixed;
+
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  font-family: "Abril Fatface", cursive;
+  margin: 0;
+  padding: 0;
 }
 
 .page_wrapper {
-  border-radius: 50px;
-  border: 2px solid #fff;
   background: transparent;
+  border: 2px solid #fff;
+  border-radius: 50px;
   margin-top: -48px;
   padding: 48px;
 }
@@ -27,20 +32,20 @@ body {
 }
 
 .header_title {
-  margin: 10px 20px;
-  justify-content: center;
-  padding: 20px;
+  background: linear-gradient(rgb(214, 74, 87), rgb(133, 40, 250));
   border: 2px solid #fff;
   border-radius: 50%;
-  background: linear-gradient(rgb(214, 74, 87), rgb(133, 40, 250));
+  justify-content: center;
+  margin: 10px 20px;
+  padding: 20px;
 }
 
 .header_font {
-  margin-bottom: 16px;
   color: #fff;
-  letter-spacing: 3px;
-  font-size: 52px;
   font-family: "Abril Fatface", cursive;
+  font-size: 52px;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
 }
 
 /* Cards Animations*/
@@ -64,8 +69,6 @@ body {
   animation: dealingCards 1s reverse;
 }
 
-/* FlipCard animation inspired by https://www.youtube.com/watch?v=QhKdOrOh90w */
-/* CSS Animation Tutorial #13 - Flipping Cards Animation by The Net Ninja */
 @keyframes flipCard {
   from {
     transform: rotateY(0deg);
@@ -85,8 +88,8 @@ body {
 .dealer_hand,
 .player_hand {
   display: flex;
-  justify-content: center;
   height: 175px;
+  justify-content: center;
   margin-bottom: 20px;
 }
 
@@ -95,48 +98,48 @@ body {
 .card_wrapper2,
 .card_wrapper3,
 .card_wrapper4 {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .dealt_card {
-  position: relative;
   display: flex;
   flex-direction: column;
-  width: 100px;
   height: 160px;
   margin-left: -50px;
   opacity: 0;
+  position: relative;
+  width: 100px;
 }
 
 .card_body {
-  display: flex;
-  flex-direction: column;
-  width: 100px;
-  height: 160px;
+  background-color: #fff;
   border: 2px solid;
   border-radius: 15px;
-  background-color: #fff;
-  /* backface-visibility: hidden; */
+  display: flex;
+  flex-direction: column;
+  height: 160px;
+  width: 100px;
 }
 
 .back {
-  position: absolute;
-  width: 100px;
-  height: 160px;
+  background: linear-gradient(rgb(214, 74, 87), rgb(133, 40, 250));
   border: 2px solid;
   border-radius: 15px;
-  background: linear-gradient(rgb(214, 74, 87), rgb(133, 40, 250));
+  height: 160px;
+  position: absolute;
+  width: 100px;
 }
 
 .card_detail {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 10px;
   font-family: "Abril Fatface", cursive;
+  padding: 10px;
 }
+
 .card_suit_top,
 .card_top {
   align-self: flex-start;
@@ -160,54 +163,60 @@ body {
 
 /* Score Card */
 .score_blocks {
-  position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  right: 0;
-  margin-right: 148px;
-  top: 180px;
   gap: 90px;
+  justify-content: center;
+  margin-right: 148px;
+  position: absolute;
+  right: 0;
+  top: 180px;
 }
 
 .score {
-  display: none;
-  text-align: center;
-  text-decoration: none;
-  font-family: "Abril Fatface", cursive;
-  padding: 15px;
-  font-size: 18px;
+  background-color: #fff;
   border: 2px solid;
   border-radius: 50px;
-  background-color: #fff;
+  display: none;
+  font-family: "Abril Fatface", cursive;
+  font-size: 18px;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
 }
 
 /* Outcomes */
 .outcomes {
-  position: relative;
-  display: flex;
   align-items: center;
-  justify-content: center;
+  display: flex;
   font-family: "Abril Fatface", cursive;
+  justify-content: center;
+  position: relative;
 }
 
 .display {
+  left: auto;
   margin: auto;
   position: absolute;
-  left: auto;
   right: auto;
   z-index: 2;
 }
 
 .win {
+  color: white;
   font-size: 48px;
-  color: rgba(245, 120, 110, 0.8);
   text-shadow: -1px 1px 0 #000;
 }
 
 .bust {
-  font-size: 48px;
   color: rgba(133, 40, 250, 1);
+  font-size: 48px;
+  text-shadow: -1px 1px 0 #000;
+}
+
+.push {
+  color: rgba(245, 120, 110, 1);
+  font-size: 48px;
   text-shadow: -1px 1px 0 #000;
 }
 
@@ -221,46 +230,46 @@ body {
 
 /* Buttons */
 .footer {
-  position: fixed;
   bottom: 0;
+  position: fixed;
   width: 100%;
 }
 
 .control_buttons {
   display: flex;
   flex-direction: row;
+  gap: 25px;
   justify-content: center;
   margin-top: -50px;
-  gap: 25px;
 }
 
 .button {
+  background: radial-gradient(
+    circle,
+    rgba(89, 23, 249, 1) 50%,
+    rgba(133, 40, 250, 1) 90%
+  );
+  border: 2px solid #fff;
+  border-radius: 50px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  font-family: "Abril Fatface", cursive;
+  font-size: 14px;
   margin: 4px 2px;
   padding: 5px;
   text-align: center;
   text-decoration: none;
-  font-family: "Abril Fatface", cursive;
-  width: 120px;
-  font-size: 14px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  background: radial-gradient(
-    circle,
-    rgba(89, 23, 249, 1) 0%,
-    rgba(133, 40, 250, 1) 60%
-  );
   transition: 0.2s;
-  color: #fff;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease 0s;
+  width: 120px;
 }
 
 .button:hover {
   background: linear-gradient(rgb(214, 74, 87), rgb(133, 40, 250));
   box-shadow: 0px 15px 20px rgba(133, 40, 250, 0.4);
   color: #fff;
-  transform: translateY(-7px);
   opacity: 1;
+  transform: translateY(-7px);
 }
 
 .hit,
@@ -280,16 +289,16 @@ body {
 
   .dealer_hand,
   .player_hand {
+    margin-bottom: 0;
     padding-left: 24px;
     padding-top: 10px;
-    margin-bottom: 0;
   }
 
   .card_body,
   .dealt_card,
   .back {
-    width: 80px;
     height: 133px;
+    width: 80px;
   }
 
   .card_detail h1 {
@@ -303,20 +312,20 @@ body {
   }
 
   .score {
+    border-radius: 50px;
     font-size: 18px;
     padding: 15px 35px;
-    border-radius: 50px;
   }
 
   .control_buttons {
+    gap: 0;
     margin-right: 0;
     margin-top: -48px;
-    gap: 0;
   }
 
   .button {
+    border-radius: 50px;
     font-size: 10px;
     padding: 5px;
-    border-radius: 50px;
   }
 }
