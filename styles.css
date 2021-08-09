@@ -51,7 +51,7 @@ body {
   font-family: "Abril Fatface", cursive;
 }
 
-/* Cards */
+/* Cards Animations*/
 
 @keyframes dealingCards {
   from {
@@ -70,6 +70,24 @@ body {
 
 .card_animate_reverse {
   animation: dealingCards 1s reverse;
+}
+
+/* FlipCard animation inspired by https://www.youtube.com/watch?v=QhKdOrOh90w */
+/* CSS Animation Tutorial #13 - Flipping Cards Animation by The Net Ninja */
+@keyframes flipCard {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(90deg);
+  }
+}
+.flip_card {
+  animation: flipCard 0.2s ease-in forwards;
+}
+
+.flip_card_reverse {
+  animation: flipCard 0.2s 0.2s ease-out forwards reverse;
 }
 
 .dealer_hand,
@@ -108,7 +126,7 @@ body {
   border: 2px solid;
   border-radius: 15px;
   background-color: #fff;
-  backface-visibility: hidden;
+  /* backface-visibility: hidden; */
 }
 
 .back {
@@ -122,7 +140,6 @@ body {
     rgba(89, 23, 249, 1) 0%,
     rgba(133, 40, 250, 1) 60%
   );
-  transform: rotateY(-180deg);
 }
 
 .card_detail {

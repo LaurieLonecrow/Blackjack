@@ -5,6 +5,7 @@
 
 var dealer = [];
 var player = [];
+var dealerInitialScore = 0;
 var dealerScore = 0;
 var playerScore = 0;
 var deck;
@@ -97,13 +98,18 @@ function dealerScoring() {
       dealerScore += dealer[i].score;
     }
   }
-  $("#dealer-score").html(`<h1>${dealerScore}</h1>`).css("font-size", "12px");
   return dealerScore;
 }
 
-function dealerInitialScore() {
-  dealerScore = dealer[0].score;
+function updateDealerScoring() {
   $("#dealer-score").html(`<h1>${dealerScore}</h1>`).css("font-size", "12px");
+}
+
+function dealerInitialScoring() {
+  dealerInitialScore += dealer[0].score;
+  $("#dealer-score")
+    .html(`<h1>${dealerInitialScore}</h1>`)
+    .css("font-size", "12px");
 }
 //Start the Game
 function startGame() {
@@ -112,7 +118,7 @@ function startGame() {
   player.push(randomCard(deck));
   dealer.push(randomCard(deck));
   winOrLose();
-  setTimeout(dealerInitialScore, 2000);
+  setTimeout(dealerInitialScoring, 2000);
   // setTimeout(dealerScoring, 2000);
   setTimeout(playerScoring, 2000);
 }
@@ -136,8 +142,8 @@ function backOfCard(card) {
 
 //Function to flip Dealer[1]
 function flipDealerCard() {
-  $("#dealer-card1").children(".back").css("transform", "rotateY(0deg)");
-  $("#dealer-card1").children(".card_body").css("transform", "rotateY(180deg)");
+  $("#dealer-card1").children(".back").addClass("flip_card");
+  $("#dealer-card1").children(".card_body").addClass("flip_card_reverse");
 }
 
 // Start of game card display
@@ -159,6 +165,9 @@ $(function () {
       .append(changeCard(dealer[1]))
       .addClass("card_animate dealt_card")
       .css("animation-delay", "1s");
+    $("#dealer-card1")
+      .children(".card_body")
+      .css("transform", "rotateY(90deg)");
     $("#dealer-card1")
       .append(backOfCard(dealer[1]))
       .addClass("card_animate dealt_card")
@@ -182,13 +191,20 @@ function reStartGame() {
 
 // Hit
 function hit() {
+  dealerScoring();
+
   if (playerScore < 21 && player.length === 4) {
     player.push(randomCard(deck));
     $("#player-card4")
       .append(changeCard(player[4]))
       .addClass("card_animate dealt_card");
-    setTimeout(playerScoring, 1000);
-    setTimeout(winOrLose, 1500);
+    playerScoring();
+    if (playerScore > 21) {
+      flipDealerCard();
+      updateDealerScoring();
+      $(".player_bust").animate({ opacity: 1, left: "180px" }, "slow");
+      setTimeout(reStartGame, 2500);
+    }
   }
 
   if (playerScore < 21 && player.length === 3) {
@@ -196,8 +212,13 @@ function hit() {
     $("#player-card3")
       .append(changeCard(player[3]))
       .addClass("card_animate dealt_card");
-    setTimeout(playerScoring, 1000);
-    setTimeout(winOrLose, 1500);
+    playerScoring();
+    if (playerScore > 21) {
+      flipDealerCard();
+      updateDealerScoring();
+      $(".player_bust").animate({ opacity: 1, left: "180px" }, "slow");
+      setTimeout(reStartGame, 2500);
+    }
   }
 
   if (playerScore < 21 && player.length === 2) {
@@ -205,76 +226,64 @@ function hit() {
     $("#player-card2")
       .append(changeCard(player[2]))
       .addClass("card_animate dealt_card");
-    setTimeout(playerScoring, 1000);
-    setTimeout(winOrLose, 1500);
+    playerScoring();
+    if (playerScore > 21) {
+      flipDealerCard();
+      updateDealerScoring();
+      $(".player_bust").animate({ opacity: 1, left: "180px" }, "slow");
+      setTimeout(reStartGame, 2500);
+    }
   }
-
-  if (dealerScore <= 18 && dealer.length === 3 && dealerScore < playerScore) {
-    dealer.push(randomCard(deck));
-    $("#dealer-card")
-      .append(changeCard(dealer[3]))
-      .addClass("card_animate dealt_card")
-      .css("animation-delay", "0.8s");
-    setTimeout(dealerScoring, 1000);
-    setTimeout(winOrLose, 1500);
-  }
-  if (dealerScore <= 18 && dealer.length === 2 && dealerScore <= playerScore) {
-    dealer.push(randomCard(deck));
-    $("#dealer-card2")
-      .append(changeCard(dealer[2]))
-      .addClass("card_animate dealt_card")
-      .css("animation-delay", "0.8s");
-    setTimeout(dealerScoring, 1000);
-    setTimeout(winOrLose, 1500);
-  }
-  setTimeout(winOrLose, 1500);
 }
 
 // Stand
-$(function () {
-  $("#stand").click(function () {
-    if (dealer.length === 4) {
-      if (
-        dealerScore < playerScore ||
-        (dealerScore === playerScore && dealerScore < 21)
-      ) {
-        dealer.push(randomCard(deck));
-        $("#dealer-card4")
-          .append(changeCard(dealer[4]))
-          .addClass("card_animate dealt_card");
-        setTimeout(dealerScoring, 1000);
-      }
-      setTimeout(winOrLose, 1500);
+function stand() {
+  flipDealerCard();
+  dealerScoring();
+  updateDealerScoring();
+  if (dealer.length === 4) {
+    if (
+      dealerScore < playerScore ||
+      (dealerScore === playerScore && dealerScore < 21)
+    ) {
+      dealer.push(randomCard(deck));
+      $("#dealer-card4")
+        .append(changeCard(dealer[4]))
+        .addClass("card_animate dealt_card");
+      dealerScoring();
+      updateDealerScoring();
     }
-    if (dealer.length === 3) {
-      if (
-        dealerScore < playerScore ||
-        (dealerScore === playerScore && dealerScore < 21)
-      ) {
-        dealer.push(randomCard(deck));
-        $("#dealer-card3")
-          .append(changeCard(dealer[3]))
-          .addClass("card_animate dealt_card");
-        setTimeout(dealerScoring, 1000);
-      }
-      setTimeout(winOrLose, 1500);
+    setTimeout(winOrLose, 2500);
+  }
+  if (dealer.length === 3) {
+    if (
+      dealerScore < playerScore ||
+      (dealerScore === playerScore && dealerScore < 21)
+    ) {
+      dealer.push(randomCard(deck));
+      $("#dealer-card3")
+        .append(changeCard(dealer[3]))
+        .addClass("card_animate dealt_card");
+      dealerScoring();
+      updateDealerScoring();
     }
-    if (dealer.length === 2 || player.length === 2) {
-      if (
-        dealerScore < playerScore ||
-        (dealerScore === playerScore && dealerScore < 21)
-      ) {
-        dealer.push(randomCard(deck));
-        $("#dealer-card2")
-          .append(changeCard(dealer[2]))
-          .addClass("card_animate dealt_card");
-        setTimeout(dealerScoring, 1000);
-      }
-      setTimeout(winOrLose, 1500);
+    setTimeout(winOrLose, 2500);
+  }
+  if (dealer.length === 2) {
+    if (
+      dealerScore < playerScore ||
+      (dealerScore === playerScore && dealerScore < 21)
+    ) {
+      dealer.push(randomCard(deck));
+      $("#dealer-card2")
+        .append(changeCard(dealer[2]))
+        .addClass("card_animate dealt_card");
+      dealerScoring();
+      updateDealerScoring();
     }
-  });
-  setTimeout(winOrLose, 1500);
-});
+    setTimeout(winOrLose, 2500);
+  }
+}
 
 // Win/Lose
 function winOrLose() {
@@ -286,17 +295,23 @@ function winOrLose() {
     (playerScore > 21 && playerScore < dealerScore) ||
     (playerScore < dealerScore && dealerScore >= 19 && player.length == 5)
   ) {
+    flipDealerCard();
+    dealerScoring();
+
     $(".dealer_wins").animate({ opacity: 1, right: "180px" });
-    $(".card_body").addClass("card_animate_reverse").css("opacity", "0");
-    setTimeout(reStartGame, 2000);
+    $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
+    setTimeout(reStartGame, 3500);
   } else if (
     (playerScore < 21 && playerScore > dealerScore && player.length >= 4) ||
     (dealerScore > 21 && playerScore > dealerScore) ||
     (playerScore < 21 && playerScore > dealerScore && playerScore >= 19)
   ) {
+    flipDealerCard();
+    dealerScoring();
+
     $(".player_wins").animate({ opacity: 1, right: "180px" });
-    $(".card_body").addClass("card_animate_reverse").css("opacity", "0");
-    setTimeout(reStartGame, 2000);
+    $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
+    setTimeout(reStartGame, 3500);
   } else if (
     (dealerScore === 21 && playerScore < dealerScore) ||
     (dealerScore === 21 && playerScore > dealerScore) ||
@@ -310,9 +325,12 @@ function winOrLose() {
       player.length > 2) ||
     (playerScore > 21 && dealerScore < 21)
   ) {
+    flipDealerCard();
+    dealerScoring();
+
     $(".dealer_wins").animate({ opacity: 1, right: "150px" });
-    $(".card_body").addClass("card_animate_reverse").css("opacity", "0");
-    setTimeout(reStartGame, 2000);
+    $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
+    setTimeout(reStartGame, 3500);
   } else if (
     (playerScore === 21 && dealerScore < playerScore) ||
     (playerScore === 21 && dealer.length >= 2) ||
@@ -327,12 +345,18 @@ function winOrLose() {
     (dealerScore > 21 && playerScore < 21) ||
     (playerScore > 21 && dealerScore > 21 && playerScore > dealerScore)
   ) {
+    flipDealerCard();
+    dealerScoring();
+
     $(".player_wins").animate({ opacity: 1, right: "180px" });
-    $(".card_body").addClass("card_animate_reverse").css("opacity", "0");
-    setTimeout(reStartGame, 2000);
+    $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
+    setTimeout(reStartGame, 3500);
   } else if (playerScore === dealerScore && dealerScore >= 20) {
+    flipDealerCard();
+    dealerScoring();
+
     $(".push").animate({ opacity: 1, right: "180px" });
-    $(".card_body").addClass("card_animate_reverse").css("opacity", "0");
-    setTimeout(reStartGame, 2000);
+    $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
+    setTimeout(reStartGame, 3500);
   }
 }
