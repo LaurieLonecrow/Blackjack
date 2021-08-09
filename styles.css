@@ -250,8 +250,12 @@ body {
 }
 
 @media screen and (max-width: 600px) {
+  .header_title {
+    padding: 10px;
+  }
+
   .header_font {
-    font-size: 32px;
+    font-size: 24px;
   }
 
   .dealer_hand,
