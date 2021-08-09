@@ -203,7 +203,10 @@ function hit() {
       flipDealerCard();
       updateDealerScoring();
       $(".player_bust").animate({ opacity: 1, left: "180px" }, "slow");
-      setTimeout(reStartGame, 2500);
+      $(".card_body, .back")
+        .addClass("card_animate_reverse")
+        .css("opacity", "0");
+      setTimeout(reStartGame, 3500);
     }
   }
 
@@ -217,7 +220,10 @@ function hit() {
       flipDealerCard();
       updateDealerScoring();
       $(".player_bust").animate({ opacity: 1, left: "180px" }, "slow");
-      setTimeout(reStartGame, 2500);
+      $(".card_body, .back")
+        .addClass("card_animate_reverse")
+        .css("opacity", "0");
+      setTimeout(reStartGame, 3500);
     }
   }
 
@@ -231,7 +237,10 @@ function hit() {
       flipDealerCard();
       updateDealerScoring();
       $(".player_bust").animate({ opacity: 1, left: "180px" }, "slow");
-      setTimeout(reStartGame, 2500);
+      $(".card_body, .back")
+        .addClass("card_animate_reverse")
+        .css("opacity", "0");
+      setTimeout(reStartGame, 3500);
     }
   }
 }
