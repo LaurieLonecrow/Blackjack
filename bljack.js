@@ -200,13 +200,7 @@ function hit() {
       .addClass("card_animate dealt_card");
     playerScoring();
     if (playerScore > 21) {
-      flipDealerCard();
-      updateDealerScoring();
-      $(".player_bust").animate({ opacity: 1, left: "180px" }, "slow");
-      $(".card_body, .back")
-        .addClass("card_animate_reverse")
-        .css("opacity", "0");
-      setTimeout(reStartGame, 3500);
+      winOrLose();
     }
   }
 
@@ -217,13 +211,7 @@ function hit() {
       .addClass("card_animate dealt_card");
     playerScoring();
     if (playerScore > 21) {
-      flipDealerCard();
-      updateDealerScoring();
-      $(".player_bust").animate({ opacity: 1, left: "180px" }, "slow");
-      $(".card_body, .back")
-        .addClass("card_animate_reverse")
-        .css("opacity", "0");
-      setTimeout(reStartGame, 3500);
+      winOrLose();
     }
   }
 
@@ -234,13 +222,7 @@ function hit() {
       .addClass("card_animate dealt_card");
     playerScoring();
     if (playerScore > 21) {
-      flipDealerCard();
-      updateDealerScoring();
-      $(".player_bust").animate({ opacity: 1, left: "180px" }, "slow");
-      $(".card_body, .back")
-        .addClass("card_animate_reverse")
-        .css("opacity", "0");
-      setTimeout(reStartGame, 3500);
+      winOrLose();
     }
   }
 }
@@ -250,6 +232,7 @@ function stand() {
   flipDealerCard();
   dealerScoring();
   updateDealerScoring();
+
   if (dealer.length === 4) {
     if (
       dealerScore < playerScore ||
@@ -297,23 +280,19 @@ function stand() {
 // Win/Lose
 function winOrLose() {
   if (
-    (playerScore < 21 &&
-      playerScore < dealerScore &&
-      playerScore != dealerScore &&
-      player.length == 5) ||
-    (playerScore > 21 && playerScore < dealerScore) ||
-    (playerScore < dealerScore && dealerScore >= 19 && player.length == 5)
+    (playerScore > 21 && playerScore < dealerScore && dealerScore <= 21) ||
+    (dealerScore === 21 && playerScore < dealerScore) ||
+    (dealerScore === 21 && playerScore > dealerScore)
   ) {
     flipDealerCard();
     dealerScoring();
-
     $(".dealer_wins").animate({ opacity: 1, right: "180px" });
     $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
     setTimeout(reStartGame, 3500);
   } else if (
-    (playerScore < 21 && playerScore > dealerScore && player.length >= 4) ||
-    (dealerScore > 21 && playerScore > dealerScore) ||
-    (playerScore < 21 && playerScore > dealerScore && playerScore >= 19)
+    (playerScore <= 21 && playerScore > dealerScore) ||
+    (playerScore <= 21 && dealerScore > 21) ||
+    (dealerScore > 21 && playerScore > dealerScore)
   ) {
     flipDealerCard();
     dealerScoring();
@@ -321,51 +300,51 @@ function winOrLose() {
     $(".player_wins").animate({ opacity: 1, right: "180px" });
     $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
     setTimeout(reStartGame, 3500);
-  } else if (
-    (dealerScore === 21 && playerScore < dealerScore) ||
-    (dealerScore === 21 && playerScore > dealerScore) ||
-    (dealerScore > playerScore &&
-      dealerScore >= 18 &&
-      dealerScore <= 21 &&
-      dealer.length > 2) ||
-    (dealerScore > playerScore &&
-      dealerScore >= 18 &&
-      dealerScore <= 21 &&
-      player.length > 2) ||
-    (playerScore > 21 && dealerScore < 21)
-  ) {
-    flipDealerCard();
-    dealerScoring();
-
-    $(".dealer_wins").animate({ opacity: 1, right: "150px" });
-    $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
-    setTimeout(reStartGame, 3500);
-  } else if (
-    (playerScore === 21 && dealerScore < playerScore) ||
-    (playerScore === 21 && dealer.length >= 2) ||
-    (playerScore > dealerScore &&
-      playerScore >= 18 &&
-      playerScore < 21 &&
-      dealer.length > 2) ||
-    (playerScore > dealerScore &&
-      playerScore >= 18 &&
-      playerScore < 21 &&
-      player.length > 2) ||
-    (dealerScore > 21 && playerScore < 21) ||
-    (playerScore > 21 && dealerScore > 21 && playerScore > dealerScore)
-  ) {
-    flipDealerCard();
-    dealerScoring();
-
-    $(".player_wins").animate({ opacity: 1, right: "180px" });
-    $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
-    setTimeout(reStartGame, 3500);
-  } else if (playerScore === dealerScore && dealerScore >= 20) {
+  } else if (playerScore === dealerScore && dealer.length >= 3) {
     flipDealerCard();
     dealerScoring();
 
     $(".push").animate({ opacity: 1, right: "180px" });
     $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
     setTimeout(reStartGame, 3500);
+  } else if (playerScore > 21) {
+    flipDealerCard();
+    updateDealerScoring();
+    $(".player_bust").animate({ opacity: 1, left: "180px" }, "slow");
+    $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
+    setTimeout(reStartGame, 3500);
   }
 }
+
+// else if (
+//   (dealerScore > playerScore && dealerScore >= 18 && dealerScore <= 21) ||
+//   (dealerScore > playerScore && dealerScore >= 18 && dealerScore <= 21) ||
+//   (playerScore > 21 && dealerScore < 21)
+// ) {
+//   flipDealerCard();
+//   dealerScoring();
+//
+//   $(".dealer_wins").animate({ opacity: 1, right: "150px" });
+//   $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
+//   setTimeout(reStartGame, 3500);
+// } else if (
+//   (playerScore === 21 && dealerScore < playerScore) ||
+//   (playerScore === 21 && dealer.length >= 2) ||
+//   (playerScore > dealerScore &&
+//     playerScore >= 18 &&
+//     playerScore < 21 &&
+//     dealer.length > 2) ||
+//   (playerScore > dealerScore &&
+//     playerScore >= 18 &&
+//     playerScore < 21 &&
+//     player.length > 2) ||
+//   (dealerScore > 21 && playerScore < 21) ||
+//   (playerScore > 21 && dealerScore > 21 && playerScore > dealerScore)
+// ) {
+//   flipDealerCard();
+//   dealerScoring();
+//
+//   $(".player_wins").animate({ opacity: 1, right: "180px" });
+//   $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
+//   setTimeout(reStartGame, 3500);
+// }
