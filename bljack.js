@@ -68,7 +68,7 @@ function randomCard() {
   return cardDrawn;
 }
 
-//Add up the player's score with Ace value 11 for inital deal
+// Add up the player's score with Ace value 11 for inital deal
 function playerScoring() {
   playerScore = 0;
   for (let i = 0; i < player.length; i++) {
