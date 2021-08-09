@@ -150,7 +150,7 @@ $(function () {
       .css("animation-delay", "1s");
     $("#start, #restart").css("display", "none");
     $("#hit, #stand").css("display", "block");
-    $("#hit").css("background-color", "rgb(40, 77, 89)");
+    $(".score").css("display", "block");
   });
 });
 

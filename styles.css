@@ -5,7 +5,12 @@ body {
   font-family: "Abril Fatface", cursive;
   /* font-family: "Roboto", sans-serif;
   font-family: "Roboto Slab", serif; */
-  background: linear-gradient(rgb(111, 201, 191) 0%, rgb(40, 77, 89) 100%);
+  background: linear-gradient(
+    0deg,
+    rgba(245, 120, 110, 0.8) 0%,
+    rgba(89, 23, 249, 1) 50%,
+    rgba(133, 40, 250, 1) 100%
+  );
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -21,10 +26,10 @@ body {
 }
 
 .header_font {
-  color: rgb(228, 136, 145);
+  color: rgba(245, 120, 110, 0.8);
   text-shadow: -2px 2px 2px #000;
   letter-spacing: 3px;
-  font-size: 48px;
+  font-size: 52px;
   font-family: "Abril Fatface", cursive;
 }
 
@@ -128,6 +133,7 @@ body {
 }
 
 .score {
+  display: none;
   text-align: center;
   text-decoration: none;
   font-family: "Abril Fatface", cursive;
@@ -157,13 +163,13 @@ body {
 
 .win {
   font-size: 48px;
-  color: rgb(249, 233, 102);
+  color: rgba(245, 120, 110, 0.8);
   text-shadow: -1px 1px 0 #000;
 }
 
 .bust {
   font-size: 48px;
-  color: rgb(40, 77, 89);
+  color: rgba(133, 40, 250, 1);
   text-shadow: -1px 1px 0 #000;
 }
 
@@ -191,22 +197,35 @@ body {
 
 .button {
   margin: 4px 2px;
-  padding: 3px;
+  padding: 5px;
   text-align: center;
   text-decoration: none;
   font-family: "Abril Fatface", cursive;
   width: 120px;
   font-size: 14px;
-  border: 2px solid;
   border-radius: 50px;
-  background-color: rgb(214, 74, 87);
+  border: 2px solid #fff;
+  background: transparent;
   opacity: 0.9;
   transition: 0.2s;
   color: #fff;
 }
 
 .button:hover {
+  background: linear-gradient(rgb(214, 74, 87), rgb(133, 40, 250));
   opacity: 1;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(-10%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+.start {
+  animation: bounce 0.5s ease alternate infinite;
 }
 
 .hit,
