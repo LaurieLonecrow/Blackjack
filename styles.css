@@ -278,6 +278,13 @@ body {
   .score_blocks {
     margin-right: -48px;
     padding-right: 24px;
+    top: 140px;
+  }
+
+  .score {
+    font-size: 18px;
+    padding: 15px 35px;
+    border-radius: 50px;
   }
 
   .control_buttons {
@@ -289,12 +296,6 @@ body {
   .button {
     font-size: 10px;
     padding: 5px;
-    border-radius: 50px;
-  }
-
-  .score {
-    font-size: 18px;
-    padding: 15px 35px;
     border-radius: 50px;
   }
 }
