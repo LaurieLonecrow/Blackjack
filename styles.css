@@ -5,7 +5,7 @@ body {
   font-family: "Abril Fatface", cursive;
   background: radial-gradient(
     circle,
-    rgba(245, 120, 110, 0.8) 0%,
+    rgba(245, 120, 110, 1) 0.5%,
     rgba(89, 23, 249, 1) 60%,
     rgba(133, 40, 250, 1) 100%
   );
@@ -32,18 +32,12 @@ body {
   padding: 20px;
   border: 2px solid #fff;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    /* rgba(245, 120, 110, 1) 20%, */ rgba(89, 23, 249, 1) 0%,
-    rgba(133, 40, 250, 1) 60%
-  );
+  background: linear-gradient(rgb(214, 74, 87), rgb(133, 40, 250));
 }
 
 .header_font {
   margin-bottom: 16px;
-  /* color: rgba(245, 120, 110, 0.8); */
   color: #fff;
-  /* text-shadow: -2px 2px 2px #000; */
   letter-spacing: 3px;
   font-size: 52px;
   font-family: "Abril Fatface", cursive;
@@ -133,11 +127,7 @@ body {
   height: 160px;
   border: 2px solid;
   border-radius: 15px;
-  background: radial-gradient(
-    circle,
-    rgba(245, 120, 110, 1) 0%,
-    rgba(133, 40, 250, 1) 60%
-  );
+  background: linear-gradient(rgb(214, 74, 87), rgb(133, 40, 250));
 }
 
 .card_detail {

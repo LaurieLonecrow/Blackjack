@@ -233,11 +233,7 @@ function stand() {
     flipDealerCard();
     dealerScoring();
     updateDealerScoring();
-    if (
-      (dealerScore > playerScore && dealerScore <= 21) ||
-      dealerScore === playerScore ||
-      dealerScore > 21
-    ) {
+    if ((dealerScore > playerScore && dealerScore <= 21) || dealerScore > 21) {
       setTimeout(winOrLose, 1500);
     } else if (
       dealerScore < playerScore ||
@@ -313,7 +309,7 @@ function winOrLose() {
     $(".player_wins").animate({ opacity: 1, right: "160px" });
     $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
     setTimeout(reStartGame, 3500);
-  } else if (playerScore === dealerScore && dealer.length >= 3) {
+  } else if (playerScore === dealerScore && dealer.length > 2) {
     flipDealerCard();
     dealerScoring();
     $(".push").animate({ opacity: 1, right: "160px" });
