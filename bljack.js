@@ -272,9 +272,9 @@ function stand() {
         .addClass("card_animate dealt_card");
       dealerScoring();
       updateDealerScoring();
-    }
-    setTimeout(winOrLose, 2500);
+    } else setTimeout(winOrLose, 2500);
   }
+  setTimeout(winOrLose, 2500);
 }
 
 // Win/Lose
