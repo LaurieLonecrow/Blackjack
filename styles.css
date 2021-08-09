@@ -209,12 +209,6 @@ body {
 }
 
 .bust {
-  color: rgba(133, 40, 250, 1);
-  font-size: 48px;
-  text-shadow: -1px 1px 0 #000;
-}
-
-.push {
   color: rgba(245, 120, 110, 1);
   font-size: 48px;
   text-shadow: -1px 1px 0 #000;
