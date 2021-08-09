@@ -286,11 +286,11 @@ function winOrLose() {
     (dealerScore === 21 && playerScore < dealerScore) ||
     (dealerScore === 21 && playerScore > dealerScore) ||
     (dealerScore > playerScore &&
-      dealerScore >= 19 &&
+      dealerScore >= 18 &&
       dealerScore <= 21 &&
       dealer.length > 2) ||
     (dealerScore > playerScore &&
-      dealerScore >= 19 &&
+      dealerScore >= 18 &&
       dealerScore <= 21 &&
       player.length > 2) ||
     (playerScore > 21 && dealerScore < 21)
@@ -302,11 +302,11 @@ function winOrLose() {
     (playerScore === 21 && dealerScore < playerScore) ||
     (playerScore === 21 && dealer.length >= 2) ||
     (playerScore > dealerScore &&
-      playerScore > 19 &&
+      playerScore >= 18 &&
       playerScore < 21 &&
       dealer.length > 2) ||
     (playerScore > dealerScore &&
-      playerScore > 19 &&
+      playerScore >= 18 &&
       playerScore < 21 &&
       player.length > 2) ||
     (dealerScore > 21 && playerScore < 21) ||
