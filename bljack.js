@@ -238,7 +238,6 @@ function stand() {
       dealerScore === playerScore ||
       dealerScore > 21
     ) {
-      console.log("winner");
       setTimeout(winOrLose, 1500);
     } else if (
       dealerScore < playerScore ||
@@ -310,14 +309,12 @@ function winOrLose() {
   ) {
     flipDealerCard();
     dealerScoring();
-
     $(".player_wins").animate({ opacity: 1, right: "160px" });
     $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
     setTimeout(reStartGame, 3500);
   } else if (playerScore === dealerScore && dealer.length >= 3) {
     flipDealerCard();
     dealerScoring();
-
     $(".push").animate({ opacity: 1, right: "160px" });
     $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
     setTimeout(reStartGame, 3500);
@@ -329,36 +326,3 @@ function winOrLose() {
     setTimeout(reStartGame, 3500);
   }
 }
-
-// else if (
-//   (dealerScore > playerScore && dealerScore >= 18 && dealerScore <= 21) ||
-//   (dealerScore > playerScore && dealerScore >= 18 && dealerScore <= 21) ||
-//   (playerScore > 21 && dealerScore < 21)
-// ) {
-//   flipDealerCard();
-//   dealerScoring();
-//
-//   $(".dealer_wins").animate({ opacity: 1, right: "150px" });
-//   $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
-//   setTimeout(reStartGame, 3500);
-// } else if (
-//   (playerScore === 21 && dealerScore < playerScore) ||
-//   (playerScore === 21 && dealer.length >= 2) ||
-//   (playerScore > dealerScore &&
-//     playerScore >= 18 &&
-//     playerScore < 21 &&
-//     dealer.length > 2) ||
-//   (playerScore > dealerScore &&
-//     playerScore >= 18 &&
-//     playerScore < 21 &&
-//     player.length > 2) ||
-//   (dealerScore > 21 && playerScore < 21) ||
-//   (playerScore > 21 && dealerScore > 21 && playerScore > dealerScore)
-// ) {
-//   flipDealerCard();
-//   dealerScoring();
-//
-//   $(".player_wins").animate({ opacity: 1, right: "180px" });
-//   $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
-//   setTimeout(reStartGame, 3500);
-// }
