@@ -209,23 +209,16 @@ body {
   opacity: 0.9;
   transition: 0.2s;
   color: #fff;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease 0s;
 }
 
 .button:hover {
   background: linear-gradient(rgb(214, 74, 87), rgb(133, 40, 250));
+  box-shadow: 0px 15px 20px rgba(133, 40, 250, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
   opacity: 1;
-}
-
-@keyframes bounce {
-  0% {
-    transform: translateY(-10%);
-  }
-  100% {
-    transform: translateY(0%);
-  }
-}
-.start {
-  animation: bounce 0.5s ease alternate infinite;
 }
 
 .hit,
