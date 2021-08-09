@@ -108,6 +108,21 @@ body {
   border: 2px solid;
   border-radius: 15px;
   background-color: #fff;
+  backface-visibility: hidden;
+}
+
+.back {
+  position: absolute;
+  width: 100px;
+  height: 160px;
+  border: 2px solid;
+  border-radius: 15px;
+  background: radial-gradient(
+    circle,
+    rgba(89, 23, 249, 1) 0%,
+    rgba(133, 40, 250, 1) 60%
+  );
+  transform: rotateY(-180deg);
 }
 
 .card_detail {
@@ -266,7 +281,8 @@ body {
   }
 
   .card_body,
-  .dealt_card {
+  .dealt_card,
+  .back {
     width: 80px;
     height: 133px;
   }

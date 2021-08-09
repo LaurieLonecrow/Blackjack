@@ -67,7 +67,7 @@ function randomCard() {
   return cardDrawn;
 }
 
-//add up the player's score with Ace value 11 for inital deal
+//Add up the player's score with Ace value 11 for inital deal
 function playerScoring() {
   playerScore = 0;
   for (let i = 0; i < player.length; i++) {
@@ -84,8 +84,7 @@ function playerScoring() {
   return playerScore;
 }
 
-//add up the dealer's score with Ace value 11 for inital deal
-
+//Add up the dealer's score with Ace value 11 for first deal
 function dealerScoring() {
   dealerScore = 0;
   for (let i = 0; i < dealer.length; i++) {
@@ -113,10 +112,11 @@ function startGame() {
   player.push(randomCard(deck));
   dealer.push(randomCard(deck));
   winOrLose();
-  setTimeout(dealerScoring, 2000);
+  setTimeout(dealerInitialScore, 2000);
+  // setTimeout(dealerScoring, 2000);
   setTimeout(playerScoring, 2000);
 }
-// Function to append card and adjust color per suit
+// Function to append cards and adjust colors per suit
 function changeCard(card) {
   return `<div class="card_body">
 <div class="card_detail" style="color:${card.color};">
@@ -127,6 +127,17 @@ function changeCard(card) {
 <h1 class="card_bottom">${card.value}</h1>
 </div>
 </div>`;
+}
+// Function to show Dealer[1] back of card on initial deal
+function backOfCard(card) {
+  return `<div class="back">
+</div>`;
+}
+
+//Function to flip Dealer[1]
+function flipDealerCard() {
+  $("#dealer-card1").children(".back").css("transform", "rotateY(0deg)");
+  $("#dealer-card1").children(".card_body").css("transform", "rotateY(180deg)");
 }
 
 // Start of game card display
@@ -146,6 +157,10 @@ $(function () {
       .css("animation-delay", "0.8s");
     $("#dealer-card1")
       .append(changeCard(dealer[1]))
+      .addClass("card_animate dealt_card")
+      .css("animation-delay", "1s");
+    $("#dealer-card1")
+      .append(backOfCard(dealer[1]))
       .addClass("card_animate dealt_card")
       .css("animation-delay", "1s");
     $("#start, #restart").css("display", "none");
