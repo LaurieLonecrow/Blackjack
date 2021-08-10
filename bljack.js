@@ -38,7 +38,8 @@ function fullDeck() {
         score = 10;
       }
       if (values[v] == "A") {
-        score = 1;
+        score = 0;
+        // Changed Ace to 0 for later scoring
       }
       let color;
       if (suits[s] == "♥" || suits[s] == "♦") {
@@ -72,14 +73,12 @@ function randomCard() {
 function playerScoring() {
   playerScore = 0;
   for (let i = 0; i < player.length; i++) {
-    if (
-      (player[0].value === "A" && player[1].score == 10) ||
-      (player[1].value === "A" && player[0].score == 10)
-    ) {
-      playerScore = 21;
-    } else {
-      playerScore += player[i].score;
+    if (player[i].value === "A" && playerScore < 11) {
+      playerScore += 11;
+    } else if (player[i].value === "A" && playerScore >= 11) {
+      playerScore += 1;
     }
+    playerScore += player[i].score;
   }
   $("#player-score").html(`<h1>${playerScore}</h1>`).css("font-size", "12px");
   return playerScore;
@@ -89,14 +88,12 @@ function playerScoring() {
 function dealerScoring() {
   dealerScore = 0;
   for (let i = 0; i < dealer.length; i++) {
-    if (
-      (dealer[0].value === "A" && dealer[1].score == 10) ||
-      (dealer[1].value === "A" && dealer[0].score == 10)
-    ) {
-      dealerScore = 21;
-    } else {
-      dealerScore += dealer[i].score;
+    if (dealer[i].value === "A" && dealerScore < 11) {
+      dealerScore += 11;
+    } else if (dealer[i].value === "A" && dealerScore >= 11) {
+      dealerScore += 1;
     }
+    dealerScore += dealer[i].score;
   }
   return dealerScore;
 }
