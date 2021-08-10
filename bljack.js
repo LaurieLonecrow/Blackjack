@@ -73,12 +73,12 @@ function randomCard() {
 function playerScoring() {
   playerScore = 0;
   for (let i = 0; i < player.length; i++) {
-    if (player[i].value === "A" && playerScore < 11) {
-      playerScore += 11;
-    } else if (player[i].value === "A" && playerScore >= 11) {
-      playerScore += 1;
-    }
     playerScore += player[i].score;
+    if (player[i].value === "A" && playerScore >= 11) {
+      playerScore += 1;
+    } else if (player[i].value === "A" && playerScore < 11) {
+      playerScore += 11;
+    }
   }
   $("#player-score").html(`<h1>${playerScore}</h1>`).css("font-size", "12px");
   return playerScore;
@@ -88,12 +88,12 @@ function playerScoring() {
 function dealerScoring() {
   dealerScore = 0;
   for (let i = 0; i < dealer.length; i++) {
-    if (dealer[i].value === "A" && dealerScore < 11) {
-      dealerScore += 11;
-    } else if (dealer[i].value === "A" && dealerScore >= 11) {
-      dealerScore += 1;
-    }
     dealerScore += dealer[i].score;
+    if (dealer[i].value === "A" && dealerScore >= 11) {
+      dealerScore += 1;
+    } else if (dealer[i].value === "A" && dealerScore < 11) {
+      dealerScore += 11;
+    }
   }
   return dealerScore;
 }
@@ -104,6 +104,9 @@ function updateDealerScoring() {
 
 function dealerInitialScoring() {
   dealerInitialScore += dealer[0].score;
+  if (dealer[0].value === "A") {
+    dealerInitialScore += 11;
+  }
   $("#dealer-score")
     .html(`<h1>${dealerInitialScore}</h1>`)
     .css("font-size", "12px");
@@ -176,7 +179,7 @@ $(function () {
   });
 });
 
-//Restart the Game
+// Restart the Game
 function reStartGame() {
   fullDeck();
   dealer = [];
@@ -307,7 +310,10 @@ function winOrLose() {
     $(".player_wins").animate({ opacity: 1, right: "160px" });
     $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
     setTimeout(reStartGame, 3500);
-  } else if (playerScore === dealerScore && dealer.length > 2) {
+  } else if (
+    (playerScore === dealerScore && dealer.length > 2) ||
+    (playerScore === dealerScore && playerScore === 21)
+  ) {
     flipDealerCard();
     dealerScoring();
     $(".push").animate({ opacity: 1, right: "160px" });
