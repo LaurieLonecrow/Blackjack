@@ -312,7 +312,7 @@ function winOrLose() {
     setTimeout(reStartGame, 3500);
   } else if (
     (playerScore === dealerScore && dealer.length > 2) ||
-    (playerScore === dealerScore && playerScore === 21)
+    (playerScore === dealerScore && playerScore == 21)
   ) {
     flipDealerCard();
     dealerScoring();
