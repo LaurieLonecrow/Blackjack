@@ -260,7 +260,7 @@ function stand() {
     if (
       (dealerScore > playerScore && dealerScore <= 21) ||
       dealerScore > 21 ||
-      dealerScore === playerScore
+      (dealerScore === playerScore && dealerScore === 21)
     ) {
       setTimeout(winOrLose, 2000);
     } else if (
@@ -279,7 +279,7 @@ function stand() {
     if (
       (dealerScore > playerScore && dealerScore > 21) ||
       (dealerScore > playerScore && dealerScore <= 21) ||
-      dealerScore === playerScore
+      (dealerScore === playerScore && dealerScore === 21)
     ) {
       setTimeout(winOrLose, 2000);
     } else if (
@@ -291,8 +291,8 @@ function stand() {
         .append(changeCard(dealer[4]))
         .addClass("card_animate dealt_card");
       dealerScoring();
-      updateDealerScoring();
-      winOrLose();
+      setTimeout(updateDealerScoring, 1000);
+      setTimeout(winOrLose, 2000);
     }
   }
 }
@@ -309,8 +309,8 @@ function winOrLose() {
     dealerScoring();
     updateDealerScoring();
     $(".dealer_wins").animate({ opacity: 1, right: "160px" });
-    $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
-    setTimeout(reStartGame, 3500);
+    $(".card_body").addClass("card_animate_reverse").css("opacity", "0");
+    setTimeout(reStartGame, 5500);
   } else if (
     (playerScore <= 21 && playerScore > dealerScore) ||
     (playerScore <= 21 && dealerScore > 21)
@@ -319,8 +319,8 @@ function winOrLose() {
     dealerScoring();
     updateDealerScoring();
     $(".player_wins").animate({ opacity: 1, right: "160px" });
-    $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
-    setTimeout(reStartGame, 3500);
+    $(".card_body").addClass("card_animate_reverse").css("opacity", "0");
+    setTimeout(reStartGame, 5500);
   } else if (
     (playerScore === dealerScore && dealer.length > 2) ||
     (playerScore === dealerScore && playerScore === 21)
@@ -329,14 +329,14 @@ function winOrLose() {
     dealerScoring();
     updateDealerScoring();
     $(".push").animate({ opacity: 1, right: "160px" });
-    $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
-    setTimeout(reStartGame, 3500);
+    $(".card_body").addClass("card_animate_reverse").css("opacity", "0");
+    setTimeout(reStartGame, 5500);
   } else if (playerScore > 21) {
     flipDealerCard();
     dealerScoring();
     updateDealerScoring();
     $(".player_bust").animate({ opacity: 1, left: "160px" }, "slow");
-    $(".card_body, .back").addClass("card_animate_reverse").css("opacity", "0");
-    setTimeout(reStartGame, 3500);
+    $(".card_body").addClass("card_animate_reverse").css("opacity", "0");
+    setTimeout(reStartGame, 5500);
   }
 }
