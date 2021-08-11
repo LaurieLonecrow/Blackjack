@@ -238,8 +238,12 @@ function stand() {
     dealerScoring();
     flipDealerCard();
     updateDealerScoring();
-    if ((dealerScore > playerScore && dealerScore <= 21) || dealerScore > 21) {
-      setTimeout(winOrLose, 1500);
+    if (
+      (dealerScore > playerScore && dealerScore <= 21) ||
+      dealerScore > 21 ||
+      (dealerScore === playerScore && dealerScore === 21)
+    ) {
+      setTimeout(winOrLose, 2000);
     } else if (
       dealerScore < playerScore ||
       (dealerScore === playerScore && dealerScore < 21)
@@ -258,7 +262,7 @@ function stand() {
       dealerScore > 21 ||
       dealerScore === playerScore
     ) {
-      setTimeout(winOrLose, 1500);
+      setTimeout(winOrLose, 2000);
     } else if (
       dealerScore < playerScore ||
       (dealerScore === playerScore && dealerScore < 21)
@@ -277,7 +281,7 @@ function stand() {
       (dealerScore > playerScore && dealerScore <= 21) ||
       dealerScore === playerScore
     ) {
-      setTimeout(winOrLose, 1500);
+      setTimeout(winOrLose, 2000);
     } else if (
       dealerScore < playerScore ||
       (dealerScore === playerScore && dealerScore < 21)
@@ -319,7 +323,7 @@ function winOrLose() {
     setTimeout(reStartGame, 3500);
   } else if (
     (playerScore === dealerScore && dealer.length > 2) ||
-    (playerScore === dealerScore && playerScore == 21)
+    (playerScore === dealerScore && playerScore === 21)
   ) {
     flipDealerCard();
     dealerScoring();
