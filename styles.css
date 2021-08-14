@@ -9,8 +9,8 @@ body {
     rgba(89, 23, 249, 1) 60%,
     rgba(133, 40, 250, 1) 100%
   );
-  background-attachment: fixed;
 
+  background-attachment: fixed;
   background-repeat: no-repeat;
   box-sizing: border-box;
   font-family: "Abril Fatface", cursive;
