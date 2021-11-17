@@ -1,1 +1,1 @@
-This is a Blackjack game I built as a part of a bootcamp intro challenge. It can be played here  https://laurielonecrow.github.io/Blackjack/
+This is a Blackjack game I built as a part of a bootcamp intro challenge. It is a simple app with no framework, just HTML/CSS/Javascript+Jquery.  I'm still proud of this one! It can be played here  https://laurielonecrow.github.io/Blackjack/
